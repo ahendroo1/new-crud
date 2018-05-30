@@ -18,34 +18,32 @@ const Header = (props) => {
                             <a data-activates="nav-mobile" class="button-collapse">
                                 <i class="material-icons">menu</i>
                             </a>
+
                             <ul class="right hide-on-med-and-down">
 
                                 <li class="site-nav--active">
                                     <Link to="/" class="site-nav__link">Home</Link>
-                                </li>
-                                <li class="site-nav--active">
-                                    <Link to="/article" class="site-nav__link">Article</Link>
                                 </li>
 
                                 <li class="site-nav--has-submenu">
 
                                     <a href="#" class="site-nav__link dropdown-button" data-activates="features-dropdown" data-beloworigin="true" data-constrainwidth="false" data-hover="true">
                                         Space
-                                        <i class="material-icons right">arrow_drop_down</i>
+                                        {/* <i class="material-icons right">arrow_drop_down</i> */}
                                     </a>
 
                                     <ul id="features-dropdown" class="site-nav__submenu dropdown-content">
 
                                         <li>
-                                            <a href="space_booking" class="site-nav__link">Meeting Room</a>
+                                            <Link to="/space_booking" class="site-nav__link">Meeting Room</Link>
                                         </li>
 
                                         <li>
-                                            <a href="space_booking" class="site-nav__link">Event Space</a>
+                                            <Link to="/space_booking" class="site-nav__link">Event Space</Link>
                                         </li>
 
                                         <li>
-                                            <a href="space_booking" class="site-nav__link">Open Space</a>
+                                            <Link to="/space_booking" class="site-nav__link">Open Space</Link>
                                         </li>
 
                                         <li>
@@ -53,19 +51,11 @@ const Header = (props) => {
                                         </li>
                                     </ul>
                                 </li>
+                                <li class="site-nav--active">
+                                    <Link to="/article" class="site-nav__link">Article</Link>
+                                </li>
 
-                                <li>
-                                    <a href="blogs/news.html" class="site-nav__link">Events</a>
-                                </li>
-                                <li>
-                                    <a href="/article" class="site-nav__link">Article</a>
-                                </li>
-                                <li>
-                                    <a href="blog" class="site-nav__link">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="kontak" class="site-nav__link">Kontak</a>
-                                </li>
+                                
 
                                 {/* <li>
                                     <a href="cart.html">
@@ -109,8 +99,9 @@ const Header = (props) => {
                         </li>  */}
                 
                         <li class="site-nav--active active">
-                            <a href="" class="site-nav__link">Profile</a>
+                            <Link to="/" class="site-nav__link">Home</Link>
                         </li>
+                        
 
                         <li class="site-nav--has-submenu">
                             <ul class="collapsible" data-collapsible="accordion">
@@ -121,32 +112,29 @@ const Header = (props) => {
                                     <div class="collapsible-body no-padding">
                                         <ul>
                                             <li>
-                                                <a href="space_booking" class="site-nav__link">Meeting Room</a>
+                                                <Link to="/space_booking" class="site-nav__link">Meeting Room</Link>
                                             </li>
 
                                             <li>
-                                                <a href="space_booking" class="site-nav__link">Event Space</a>
+                                                <Link to="/space_booking" class="site-nav__link">Event Space</Link>
                                             </li>
 
                                             <li>
-                                                <a href="space_booking" class="site-nav__link">Open Space</a>
+                                                <Link to="/space_booking" class="site-nav__link">Open Space</Link>
+                                            </li>
+
+                                            <li>
+                                                <Link to="/space_booking" class="site-nav__link">All Space</Link>
                                             </li>
                                         </ul>
                                     </div>
                                 </li>
                             </ul>
                         </li>
-
-                        <li>
-                            <a href="blogs/news.html" class="site-nav__link">Events</a>
+                        <li class="site-nav--active">
+                            <Link to="/article" class="site-nav__link">Article</Link>
                         </li>
 
-                        <li>
-                            <a href="blog" class="site-nav__link">Blog</a>
-                        </li>
-                        <li>
-                            <a href="kontak" class="site-nav__link">Kontak</a>
-                        </li>
 
                     </ul>
 

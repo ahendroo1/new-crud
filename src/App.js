@@ -9,13 +9,6 @@ import Home from './components/Home';
 import Article from './components/Article';
 import Space_booking from './components/Space_booking';
 
-import { Accordion, AccordionTab } from 'primereact/components/accordion/Accordion';
-import 'primereact/resources/primereact.min.css';
-import 'primereact/resources/themes/omega/theme.css';
-import 'font-awesome/css/font-awesome.css';
-import { Button } from 'primereact/components/button/Button';
-import { Calendar } from 'primereact/components/calendar/Calendar';
-
 class App extends Component {
   render() {
     return (
