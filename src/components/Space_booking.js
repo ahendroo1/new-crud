@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import axios from 'axios';
+// import axios from 'axios';
 // primeReact
 import { Accordion, AccordionTab } from 'primereact/components/accordion/Accordion';
 import 'primereact/resources/primereact.min.css';
@@ -49,9 +49,9 @@ class Space_booking extends Component {
 
     componentDidMount(){
         // #1 Get All Data 
-        axios.get('https://swapi.co/api/films') .then((ambilData) => {
-            this.setState();
-        })
+        // axios.get('https://swapi.co/api/films') .then((ambilData) => {
+        //     this.setState();
+        // })
     };
 
 
