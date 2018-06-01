@@ -40,15 +40,31 @@
   border:0px solid white;
 }
 .panel_booking_content{
-  padding-right:15px;
   padding-bottom:80px;
   padding-top:20px;
-  margin-right:15px;
 }
+
 .ui-sidebar-close{
   display:none;
 }
 .col-size-0 {
   padding:0px;
   margin:0px;
+}
+
+#pr_id_1_header_0{
+  border-bottom: 0px solid black;
+  background-color:white;
+}
+
+.nav-menu-site-offis{
+  padding: 5px;
+  margin-bottom:10x;
+  border-bottom: 1px solid white;
+  text-decoration:none;
+  color:rgba(0,0,0,0.87);
+}
+
+.col{
+  margin-bottom:30px;
 }

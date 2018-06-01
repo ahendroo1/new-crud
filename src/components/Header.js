@@ -1,56 +1,72 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import {Sidebar} from 'primereact/components/sidebar/Sidebar';
+import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion';
+import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
+import {Button} from 'primereact/components/button/Button';
+import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
 
-const Header = (props) => { 
+class Header extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            visibleLeft: false,
+        };
+        this.items = [
+            {label: 'Update', icon: 'fa-refresh', command: (e) => {
+                this.growl.show({severity:'success', summary:'Updated', detail:'Data Updated'});
+            }},
+            {label: 'Delete', icon: 'fa-close', command: (e) => {
+                this.growl.show({ severity: 'success', summary: 'Delete', detail: 'Data Deleted' });
+            }},
+            {label: 'React Website', icon: 'fa-link', url: 'https://facebook.github.io/react/'},
+            {label: 'Upload', icon: 'fa-paint-brush', command:(e) => {
+                window.location.hash="/fileupload"
+            }}
+        ];
+
+    }
+
+    render(){
         return (
                 <div id="shopify-section-header" class="shopify-section">
-                    <nav class="nav-extended">
 
+                    <Sidebar visible={this.state.visibleLeft} baseZIndex={1000000} onHide={() => this.setState({visibleLeft: false})}>
+                        <Link to="/" class="site-nav__link" onClick={() => this.setState({visibleLeft:false})} >
+                            <p className="nav-menu-site-offis">Home </p>
+                        </Link>
+                        <Link to="/space_booking" class="site-nav__link" onClick={() => this.setState({visibleLeft:false})} >
+                            <p className="nav-menu-site-offis">Space </p>
+                        </Link>
+                        <Link to="/article" class="site-nav__link" onClick={() => this.setState({visibleLeft:false})} >
+                            <p className="nav-menu-site-offis">Article </p>
+                        </Link>
+                    </Sidebar>
+                    <nav class="nav-extended">
                         <div class="nav-background">
                             <div class="pattern active" >
-                            <img src="https://images.theconversation.com/files/86410/original/image-20150625-12984-1wai4gp.jpg?ixlib=rb-1.1.0&amp;q=45&amp;auto=format&amp;w=926&amp;fit=clip" />
+
                             </div>
                         </div>
 
                         <div class="nav-wrapper container">
                             <a href="" itemprop="url" class="brand-logo site-logo">Offis </a>
 
-                            <a data-activates="nav-mobile" class="button-collapse">
+                            <a data-activates="nav-mobile" onClick={() => this.setState({visibleLeft:true})} class="button-collapse">
                                 <i class="material-icons">menu</i>
                             </a>
 
                             <ul class="right hide-on-med-and-down">
 
+                                
                                 <li class="site-nav--active">
                                     <Link to="/" class="site-nav__link">Home</Link>
                                 </li>
-
-                                <li class="site-nav--has-submenu">
-
-                                    <a href="#" class="site-nav__link dropdown-button" data-activates="features-dropdown" data-beloworigin="true" data-constrainwidth="false" data-hover="true">
-                                        Space
-                                        {/* <i class="material-icons right">arrow_drop_down</i> */}
-                                    </a>
-
-                                    <ul id="features-dropdown" class="site-nav__submenu dropdown-content">
-
-                                        <li>
-                                            <Link to="/space_booking" class="site-nav__link">Meeting Room</Link>
-                                        </li>
-
-                                        <li>
-                                            <Link to="/space_booking" class="site-nav__link">Event Space</Link>
-                                        </li>
-
-                                        <li>
-                                            <Link to="/space_booking" class="site-nav__link">Open Space</Link>
-                                        </li>
-
-                                        <li>
-                                            <Link to="/space_booking" class="site-nav__link">All Space</Link>
-                                        </li>
-                                    </ul>
+                                <li class="site-nav--active">
+                                    <Link to="/space_booking" class="site-nav__link">Space</Link>
                                 </li>
+
                                 <li class="site-nav--active">
                                     <Link to="/article" class="site-nav__link">Article</Link>
                                 </li>
@@ -88,55 +104,6 @@ const Header = (props) => {
 
                         </div>
                     </nav>
-                    <ul class="side-nav" id="nav-mobile">
-
-                        {/* <li>
-                            <a href="account/login.html" id="customer_login_link">Log in</a>
-                        </li>
-
-                        <li>
-                            <a href="account/register.html" id="customer_register_link"> Create account</a>
-                        </li>  */}
-                
-                        <li class="site-nav--active active">
-                            <Link to="/" class="site-nav__link">Home</Link>
-                        </li>
-                        
-
-                        <li class="site-nav--has-submenu">
-                            <ul class="collapsible" data-collapsible="accordion">
-                                <li>
-                                    <div class="collapsible-header">Space
-                                        <i class="material-icons right">arrow_drop_down</i>
-                                    </div>
-                                    <div class="collapsible-body no-padding">
-                                        <ul>
-                                            <li>
-                                                <Link to="/space_booking" class="site-nav__link">Meeting Room</Link>
-                                            </li>
-
-                                            <li>
-                                                <Link to="/space_booking" class="site-nav__link">Event Space</Link>
-                                            </li>
-
-                                            <li>
-                                                <Link to="/space_booking" class="site-nav__link">Open Space</Link>
-                                            </li>
-
-                                            <li>
-                                                <Link to="/space_booking" class="site-nav__link">All Space</Link>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="site-nav--active">
-                            <Link to="/article" class="site-nav__link">Article</Link>
-                        </li>
-
-
-                    </ul>
 
                     {/* <div data-section-id="header" data-section-type="header-section">
                         <header role="banner">
@@ -166,5 +133,7 @@ const Header = (props) => {
                 );
         
         }
+
+    }
         
 export default Header;

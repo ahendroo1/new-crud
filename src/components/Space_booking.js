@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import Header from './Header';
+import Footer from './Footer';
 // import axios from 'axios';
 // primeReact
+import { Accordion, AccordionTab } from 'primereact/components/accordion/Accordion';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/omega/theme.css';
 import 'font-awesome/css/font-awesome.css';
@@ -15,13 +18,7 @@ import { Sidebar } from "primereact/components/sidebar/Sidebar";
 import { Fieldset } from 'primereact/components/fieldset/Fieldset';
 import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel';
 import { ProgressBar } from 'primereact/components/progressbar/ProgressBar';
-
-// import { SelectButton } from 'primeng/components/selectbutton/SelectButton';
-// MaterialUI
-
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import {Card} from 'primereact/components/card/Card';
 
 class Space_booking extends Component {
     
@@ -136,45 +133,62 @@ class Space_booking extends Component {
             for (var i = 0; i < angkarev.length; i++) if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + '.';
             return 'Rp. ' + rupiah.split('', rupiah.length - 1).reverse().join('');
         }
-
         let validateInputClass = classNames({
             'ui-state-error': !this.state.validatePattern
         });
+
+        let header_menu_space = <img alt="Card" src='http://www.asianentrepreneur.org/wp-content/uploads/2018/04/Perm-Desk-1024x681.png'/>;
+        let footer_menu_space = <span>
+                                    <Button label="Booking Now"  onClick={() => this.showBooking()} icon="fa-check" className="ui-button-secondary"/>
+                                </span>;
+        
+        let header_2 = <img alt="Card" src='https://ri2hb3j6fh-flywheel.netdna-ssl.com/mission-valley/wp-content/uploads/sites/11/2016/07/Coworking-Space.jpg'/>;
+        let footer_2 = <span>
+                                    <Button label="Booking Now"  onClick={() => this.showBooking()} icon="fa-check" className="ui-button-secondary"/>
+                                </span>;
+
+        
 
         return (
 
             <div className="Space_booking">
                 <div class="container">
-                    <h3>Place yourself </h3>
-                    <h6>Pastikan informasi kotak anda valid.</h6>
-                        <div class="rte">
-                            
-                        </div>
 
-                        <div className="col-lg-6">
-
-                            <h5>Affordable & Strategic Meeting Room in Jakarta</h5>
-                            provides meeting rooms with an affordable price in Jakarta. Not only is it cheap & affordable, EV Hive has several strategic meeting venues around Jakarta & Tangerang.
-
-                                <br />
-                            <br />
-                            Offis meeting locations in Mdiun:<br />
-                            <br />
-
-                            Rp 300,000/hour on weekends (Saturday - Sunday)<br />
-                            <br />
-                            If you’re looking for the nearest meeting venues with the best price in Jakarta, then choosing Coworking Space’s meeting room is suitable for you!<br />
-                        </div>
-                        <div class="col-lg-6" >
-
-                        <Button type="button" onClick={() => this.showBooking()} label="Booking Now" className="ui-button-secondary" />
-                            
-                                {/* <div class="col-">
+                    <h5>Coworking Space</h5>
+                    <hr />
+                        <div class="col-xs-12 col-md-6 col-lg-4 col">
+                            <Card title="Advanced Card" subtitle="Subtitle" style={{width: '100%'}} className="ui-card-shadow " footer={footer_menu_space} header={header_menu_space}>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                                    quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
                                 </div>
-                                <small>Sudah memiliki akun ?<a>Login</a></small><hr />
-                                <button type="submit" class="btn btn-danger btn-xs"  >Google</button>
-                                <button type="submit" class="btn btn-primary btn-xs"  >Facebook</button> */}
+                            </Card>
                         </div>
+                        <div class="col-xs-12 col-md-6 col-lg-4 col">
+                            <Card title="Advanced Card" subtitle="Subtitle" style={{width: '100%'}} className="ui-card-shadow " footer={footer_2} header={header_2}>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                                    quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
+                                </div>
+                            </Card>
+                        </div>
+                       
+                        
+                        <div class="col-xs-12 col-md-6 col-lg-4 col">
+                            <Card title="Advanced Card" subtitle="Subtitle" style={{width: '100%'}} className="ui-card-shadow " footer={footer_menu_space} header={header_menu_space}>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                                    quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
+                                </div>
+                            </Card>
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-lg-4 col">
+                            <Card title="Advanced Card" subtitle="Subtitle" style={{width: '100%'}} className="ui-card-shadow " footer={footer_2} header={header_2}>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                                    quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
+                                </div>
+                            </Card>
+                        </div>
+                       
+                    
+                       
                 </div>
 
                 <Sidebar visible={this.state.sendBooking} style={{ height: 200 }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ sendBooking: true })}>
@@ -251,7 +265,7 @@ class Space_booking extends Component {
                             </div>
                             
                             <div className="col-size-0 col-xs-12 col-lg-12">
-                                <p>Login x dengan :</p>
+                                <p>Login dengan :</p>
                                 <Button type="button" className="ui-button-danger" style={{width:'48%'}} ><i className="fa fa-google-plus"></i> Google</Button>
                                 <Button type="button" className="ui-button-primary" style={{width:'48%'}} ><i className="fa fa-facebook"></i> Facebook</Button>
                             </div>
