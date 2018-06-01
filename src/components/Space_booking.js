@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import Header from './Header';
-import Footer from './Footer';
 // import axios from 'axios';
 // primeReact
-import { Accordion, AccordionTab } from 'primereact/components/accordion/Accordion';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/omega/theme.css';
 import 'font-awesome/css/font-awesome.css';
@@ -21,6 +18,7 @@ import { ProgressBar } from 'primereact/components/progressbar/ProgressBar';
 
 // import { SelectButton } from 'primeng/components/selectbutton/SelectButton';
 // MaterialUI
+
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -53,7 +51,6 @@ class Space_booking extends Component {
         //     this.setState();
         // })
     };
-
 
     estimate(tgl1, tgl2) {
 
@@ -139,6 +136,7 @@ class Space_booking extends Component {
             for (var i = 0; i < angkarev.length; i++) if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + '.';
             return 'Rp. ' + rupiah.split('', rupiah.length - 1).reverse().join('');
         }
+
         let validateInputClass = classNames({
             'ui-state-error': !this.state.validatePattern
         });
@@ -307,7 +305,6 @@ class Space_booking extends Component {
                     </ScrollPanel >
                 </Sidebar>
 
-
                 <Sidebar visible={this.state.formBookingTrue} style={{ height: 500 }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formBookingTrue: false })}>
                     {/* <p>{this.state.notif}</p> */}
                     {/* <Button type="button" onClick={() => this.setState({ visibleBottom: true })} label="Save" className="ui-button-success" />
@@ -342,7 +339,7 @@ class Space_booking extends Component {
                             <label for="ContactFormEmail" class="">Waktu Mulai</label><br />
                             <div class="input-field">
                                 <Calendar
-                                    className="datepicker "
+                                    className="datepicker"
                                     dateFormat="dd mm yy"
                                     showButtonBar={true}
                                     value={this.state.date}

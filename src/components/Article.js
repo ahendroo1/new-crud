@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Header from './Header';
-import Footer from './Footer';
 
 class Article extends Component {
 
@@ -12,6 +10,5 @@ class Article extends Component {
         );
     }
 }
-
 
 export default Article;
