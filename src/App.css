@@ -43,6 +43,9 @@
   padding-bottom:80px;
   padding-top:20px;
 }
+.ui-scrollpanel-content{
+  width:100%;
+}
 
 .ui-sidebar-close{
   display:none;

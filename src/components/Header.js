@@ -58,7 +58,6 @@ class Header extends Component {
                             </a>
 
                             <ul class="right hide-on-med-and-down">
-
                                 
                                 <li class="site-nav--active">
                                     <Link to="/" class="site-nav__link">Home</Link>
@@ -70,8 +69,6 @@ class Header extends Component {
                                 <li class="site-nav--active">
                                     <Link to="/article" class="site-nav__link">Article</Link>
                                 </li>
-
-                                
 
                                 {/* <li>
                                     <a href="cart.html">

@@ -171,7 +171,6 @@ class Space_booking extends Component {
                             </Card>
                         </div>
                        
-                        
                         <div class="col-xs-12 col-md-6 col-lg-4 col">
                             <Card title="Advanced Card" subtitle="Subtitle" style={{width: '100%'}} className="ui-card-shadow " footer={footer_menu_space} header={header_menu_space}>
                                 <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
@@ -187,8 +186,6 @@ class Space_booking extends Component {
                             </Card>
                         </div>
                        
-                    
-                       
                 </div>
 
                 <Sidebar visible={this.state.sendBooking} style={{ height: 200 }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ sendBooking: true })}>
@@ -197,7 +194,7 @@ class Space_booking extends Component {
                 </Sidebar>
 
                 {/* Registrasi Form  */}
-                <Sidebar visible={this.state.formRegistrasi} style={{ height: 500 }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formRegistrasi: false })}>
+                <Sidebar visible={this.state.formRegistrasi} style={{ height: 350 }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formRegistrasi: false })}>
                     {/* <p>{this.state.notif}</p> */}
                     {/* <Button type="button" onClick={() => this.setState({ visibleBottom: true })} label="Save" className="ui-button-success" />
                     <Button type="button" onClick={() => this.setState({ visibleBottom: true })} label="Cancel" className="ui-button-secondary" /> */}
@@ -209,70 +206,70 @@ class Space_booking extends Component {
                         onChange={(e) => { this.setState({ date: e.value }) }}
                     ></Calendar>
                     <Button type="button" onClick={() => this.setWaktuMulai(this.state.date, this.state.date2)} label="Save" className="ui-button-secondary" /> */}
-                    <ScrollPanel legend="Booking Now" style={{ height: 500,border:0 }}  className="panel_booking"> 
-                        <div className="panel_booking_content">
-                       
-                            <span className="ui-float-label">
-                                <InputText keyfilter="alphanum" id="float-input" type="text" onChange={(e) => this.setState({nama_register: e.target.value})} />
-                                <label htmlFor="float-input">Nama Lengkap</label>
-                            </span>
+                   
+                    <div className="panel_booking_content">
+                    
+                        <span className="ui-float-label">
+                            <InputText keyfilter="alphanum" id="float-input" type="text" onChange={(e) => this.setState({nama_register: e.target.value})} />
+                            <label htmlFor="float-input">Nama Lengkap</label>
+                        </span>
 
-                            <span className="ui-float-label">
-                                <InputText keyfilter={/[^\s]/} id="float-input" type="text" onChange={(e) => this.setState({uname_login: e.target.value})} />
-                                <label htmlFor="float-input">Email</label>
-                            </span>
+                        <span className="ui-float-label">
+                            <InputText keyfilter={/[^\s]/} id="float-input" type="text" onChange={(e) => this.setState({uname_login: e.target.value})} />
+                            <label htmlFor="float-input">Email</label>
+                        </span>
 
-                            <span className="ui-float-label">
-                                <InputText keyfilter={/[^\s]/} id="float-input" keyfilter={/^[+-]?((\.\d+)|(\d+(\.\d+)?))$/} validateOnly={true} onInput={this.onValidateInput} type="text" className={validateInputClass} />
-                                <label htmlFor="float-input">Nomor Telephone</label>
-                                {!this.state.validatePattern && <Message severity="error" text="Nomor Telephone tidak Valid"></Message>}
-                            </span>
+                        <span className="ui-float-label">
+                            <InputText keyfilter={/[^\s]/} id="float-input" keyfilter={/^[+-]?((\.\d+)|(\d+(\.\d+)?))$/} validateOnly={true} onInput={this.onValidateInput} type="text" className={validateInputClass} />
+                            <label htmlFor="float-input">Nomor Telephone</label>
+                            {!this.state.validatePattern && <Message severity="error" text="Nomor Telephone tidak Valid"></Message>}
+                        </span>
 
-                            <span className="ui-float-label">
-                                <Password value={this.state.pass_login} onChange={(e) => this.setState({pass_login: e.target.value})} />
-                                <label htmlFor="float-input">Password</label>
-                            </span>
+                        <span className="ui-float-label">
+                            <Password value={this.state.pass_login} onChange={(e) => this.setState({pass_login: e.target.value})} />
+                            <label htmlFor="float-input">Password</label>
+                        </span>
 
-                            <Button type="button" onClick={() => this.registerNow()} label="Register Now" className="ui-button-primary pull-right"  />
-                        </div>
-                    </ScrollPanel >
+                        <Button type="button" onClick={() => this.registerNow()} label="Register Now" className="ui-button-primary pull-right"  />
+                    </div>
                 </Sidebar>
 
                 {/* Login Form */}
                 <Sidebar visible={this.state.formLogin} style={{ height: 350 }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formLogin: false })}>
                   
-                        <div className="panel_booking_content">
+                    <div className="panel_booking_content">
 
-                            <h5>Login Member</h5>
+                        <h5>Login Member</h5>
 
-                            <p>{this.state.login_status}</p>
-                            <span className="ui-float-label">
-                                <InputText onChange={(e) => this.setState({uname_login: e.target.value})}/>
-                                <label htmlFor="float-input">Username</label>
-                            </span>
+                        <p>{this.state.login_status}</p>
+                        <span className="ui-float-label">
+                            <InputText onChange={(e) => this.setState({uname_login: e.target.value})}/>
+                            <label htmlFor="float-input">Username</label>
+                        </span>
 
-                            <span className="ui-float-label">
-                                <Password value={this.state.value} onChange={(e) => this.setState({pass_login: e.target.value})} />
-                                <label htmlFor="float-input">Password</label>
-                            </span>
+                        <span className="ui-float-label">
+                            <Password value={this.state.value} onChange={(e) => this.setState({pass_login: e.target.value})} />
+                            <label htmlFor="float-input">Password</label>
+                        </span>
 
-                            <div className="col-size-0 col-xs-8 col-lg-6">
-                                <small>Belum punya akun ? <a type="button" onClick={() => this.setState({formRegistrasi:true,})} >Daftar</a></small>
-                            </div>
-
-                            <div className="col-size-0 col-xs-4 col-lg-6">
-                                <Button type="button" onClick={() => this.loginUser()} className="ui-button-success pull-right" ><i className="fa fa-lock"></i> Login</Button>
-                            </div>
-                            
-                            <div className="col-size-0 col-xs-12 col-lg-12">
-                                <p>Login dengan :</p>
-                                <Button type="button" className="ui-button-danger" style={{width:'48%'}} ><i className="fa fa-google-plus"></i> Google</Button>
-                                <Button type="button" className="ui-button-primary" style={{width:'48%'}} ><i className="fa fa-facebook"></i> Facebook</Button>
-                            </div>
+                        <div className="col-size-0 col-xs-8 col-lg-6">
+                            <small>Belum punya akun ? <a type="button" onClick={() => this.setState({formRegistrasi:true,})} >Daftar</a></small>
                         </div>
+
+                        <div className="col-size-0 col-xs-4 col-lg-6">
+                            <Button type="button" onClick={() => this.loginUser()} className="ui-button-success pull-right" ><i className="fa fa-lock"></i> Login</Button>
+                        </div>
+                        
+                        <div className="col-size-0 col-xs-12 col-lg-12">
+                            <p>Login dengan :</p>
+                            <Button type="button" className="ui-button-danger" style={{width:'48%'}} ><i className="fa fa-google-plus"></i> Google</Button>
+                            <Button type="button" className="ui-button-primary" style={{width:'48%'}} ><i className="fa fa-facebook"></i> Facebook</Button>
+                        </div>
+                    </div>
                 </Sidebar>
+
                 
-                <Sidebar visible={this.state.formBooking} style={{ height: 500 }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formBookingFalse: false })}>
+                <Sidebar visible={this.state.formBooking} style={{ height: 400 }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formBookingFalse: false })}>
                     {/* <p>{this.state.notif}</p> */}
                     {/* <Button type="button" onClick={() => this.setState({ visibleBottom: true })} label="Save" className="ui-button-success" />
                     <Button type="button" onClick={() => this.setState({ visibleBottom: true })} label="Cancel" className="ui-button-secondary" /> */}
@@ -284,7 +281,7 @@ class Space_booking extends Component {
                         onChange={(e) => { this.setState({ date: e.value }) }}
                     ></Calendar>
                     <Button type="button" onClick={() => this.setWaktuMulai(this.state.date, this.state.date2)} label="Save" className="ui-button-secondary" /> */}
-                    <ScrollPanel legend="Booking Now" style={{ height: 500, border: 0 }} className="panel_booking">
+                    
                         <div className="panel_booking_content">
 
                             <label for="ContactFormEmail" class="">Waktu Mulai</label><br />
@@ -311,75 +308,15 @@ class Space_booking extends Component {
                                 ></Calendar>
                                 {/* <Button label="Click" icon="fa-check" onClick={() => {this.estimate()}} /> */}
                             </div>
+                            
                             <p >Harga / Hari : {convertToRupiah(this.state.harga)}  </p>
                             <p className="left-text-harga">Hari : {this.state.tot_day}  </p>
                             <p className="left-text-harga">Harga : {convertToRupiah(this.state.tot_day * this.state.harga)}  </p>
                             <Button type="button" onClick={() => this.showBookingProgresh()} label="Booking Now" className="btn pull-right" />
                         </div>
-                    </ScrollPanel >
+                    
                 </Sidebar>
 
-                <Sidebar visible={this.state.formBookingTrue} style={{ height: 500 }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formBookingTrue: false })}>
-                    {/* <p>{this.state.notif}</p> */}
-                    {/* <Button type="button" onClick={() => this.setState({ visibleBottom: true })} label="Save" className="ui-button-success" />
-                    <Button type="button" onClick={() => this.setState({ visibleBottom: true })} label="Cancel" className="ui-button-secondary" /> */}
-                    {/* <Calendar
-                        style={{width:'50%'}}
-                        showButtonBar={true}
-                        dateFormat="dd mm yy"
-                        value={this.state.date}
-                        onChange={(e) => { this.setState({ date: e.value }) }}
-                    ></Calendar>
-                    <Button type="button" onClick={() => this.setWaktuMulai(this.state.date, this.state.date2)} label="Save" className="ui-button-secondary" /> */}
-                    <ScrollPanel legend="Booking Now" style={{ height: 500, border: 0 }} className="panel_booking">
-                        <div className="panel_booking_content">
-
-                            <span className="ui-float-label">
-                                <InputText keyfilter="alphanum" id="float-input" type="text" />
-                                <label htmlFor="float-input">Nama Lengkap</label>
-                            </span>
-
-                            <span className="ui-float-label">
-                                <InputText keyfilter={/[^\s]/} id="float-input" type="text" />
-                                <label htmlFor="float-input">Email</label>
-                            </span>
-
-                            <span className="ui-float-label">
-                                <InputText keyfilter={/[^\s]/} id="float-input" keyfilter={/^[+-]?((\.\d+)|(\d+(\.\d+)?))$/} validateOnly={true} onInput={this.onValidateInput} type="text" className={validateInputClass} />
-                                <label htmlFor="float-input">Nomor Telephone</label>
-                                {!this.state.validatePattern && <Message severity="error" text="Nomor Telephone tidak Valid"></Message>}
-                            </span>
-
-                            <label for="ContactFormEmail" class="">Waktu Mulai</label><br />
-                            <div class="input-field">
-                                <Calendar
-                                    className="datepicker"
-                                    dateFormat="dd mm yy"
-                                    showButtonBar={true}
-                                    value={this.state.date}
-                                    onChange={(e) => { this.setState({ date: e.value }) }}
-                                ></Calendar>
-                                {/* <Button label="Click" icon="fa-check" onClick={() => {this.estimate()}} /> */}
-                            </div>
-
-                            <label for="ContactFormEmail" class="">Waktu Selesai</label><br />
-                            <div class="input-field">
-                                <Calendar
-                                    className="datepicker"
-                                    dateFormat="dd mm yy"
-                                    className="datepicker"
-                                    value={this.state.date2}
-                                    onChange={(e) => { this.setState({ date2: e.value }), this.estimate(this.state.date, e.value) }}
-                                ></Calendar>
-                                {/* <Button label="Click" icon="fa-check" onClick={() => {this.estimate()}} /> */}
-                            </div>
-                            <p >Harga / Hari : {convertToRupiah(this.state.harga)}  </p>
-                            <p className="left-text-harga">Hari : {this.state.tot_day}  </p>
-                            <p className="left-text-harga">Harga : {convertToRupiah(this.state.tot_day * this.state.harga)}  </p>
-                            <Button type="button" onClick={() => this.showBookingProgresh()} label="Booking Now" className="ui-button-primary pull-right" />
-                        </div>
-                    </ScrollPanel >
-                </Sidebar>
 
             </div>
         );

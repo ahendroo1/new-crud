@@ -9,6 +9,7 @@
     "font-awesome": "^4.7.0",
     "primereact": "^1.5.3",
     "react": "^16.4.0",
+    "react-animated-slider": "^1.1.2",
     "react-dom": "^16.4.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
