@@ -117,11 +117,12 @@ button:hover {
 		width: 32px;
 		height: 32px;
 		text-indent: -9999px;
-		cursor: pointer;
+    cursor: pointer;
 }
 
 .previousButton:hover, .nextButton:hover {
   background: url('http://svgshare.com/i/41_.svg') no-repeat center center / 16px;
+
 }
 
 .previousButton {
