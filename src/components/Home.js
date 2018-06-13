@@ -10,7 +10,6 @@ import './css/styles.css';
 class Home extends Component {
 
     render() {
-
         const content = [
             {
                 title: 'Vulputate Mollis Ultricies Fermentum Parturient',
@@ -43,7 +42,7 @@ class Home extends Component {
         return (
                 <div className="Home">
                         <main role="main" id="MainContent">
-                        <Slider autoplay={3000}>
+                        <Slider autoplay={1000}>
                                 {content.map((item, index) => (
                                 <div
                                     key={index}
@@ -57,9 +56,7 @@ class Home extends Component {
                                 </div>
                             ))}
                         </Slider>
-                            
                         <Home_space />
-
                         <Home_cemiland />
 
                         </main>

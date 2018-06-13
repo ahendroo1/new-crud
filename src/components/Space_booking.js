@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 // import axios from 'axios';
 // primeReact
+
 import { Accordion, AccordionTab } from 'primereact/components/accordion/Accordion';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/omega/theme.css';
@@ -36,27 +37,22 @@ class Space_booking extends Component {
                         formLogin:false,
                         login_status: false,
                         sendBooking: false,
-                        value1: 0, 
-                        value2: 50
+                        value1: 0,
+                        value2: 50,
+                        uname_login: null,
+                        pass_login: null
                         // visibleTop: false,
         };
     }
 
-    componentDidMount(){
-        // #1 Get All Data 
-        // axios.get('https://swapi.co/api/films') .then((ambilData) => {
-        //     this.setState();
-        // })
-    };
-
     estimate(tgl1, tgl2) {
-
+        
         // var m = this.refs.tgl_mulai.value;
         // var s = this.refs.tgl_selesai.value;
         // return inDays(m, s);
         // this.setState({ tgl_mulai: tgl1 });
         // console.log(tgl1 + '/n' + tgl2);
-
+        
         // console.log(this.state.tgl_mulai);
         // console.log(tgl1);
         // this.setState({ day: this.state.date });
@@ -85,7 +81,7 @@ class Space_booking extends Component {
     loginUser(){
 
         if(this.state.uname_login == 'mau' && this.state.pass_login == 'buka'){
-            this.setState({login_status:true, formBooking: true});
+            this.setState({login_status:true, formBooking: true,formLogin: false});
             
         }else{
 
@@ -93,6 +89,7 @@ class Space_booking extends Component {
         }
 
     }
+
     registerNow(){
 
         if(this.state.uname_login == null && this.state.pass_login == null ){
@@ -145,9 +142,7 @@ class Space_booking extends Component {
         let header_2 = <img alt="Card" src='https://ri2hb3j6fh-flywheel.netdna-ssl.com/mission-valley/wp-content/uploads/sites/11/2016/07/Coworking-Space.jpg'/>;
         let footer_2 = <span>
                                     <Button label="Booking Now"  onClick={() => this.showBooking()} icon="fa-check" className="ui-button-secondary"/>
-                                </span>;
-
-        
+                                </span>;        
 
         return (
 
@@ -236,11 +231,9 @@ class Space_booking extends Component {
 
                 {/* Login Form */}
                 <Sidebar visible={this.state.formLogin} style={{ height: 350 }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formLogin: false })}>
-                  
                     <div className="panel_booking_content">
 
                         <h5>Login Member</h5>
-
                         <p>{this.state.login_status}</p>
                         <span className="ui-float-label">
                             <InputText onChange={(e) => this.setState({uname_login: e.target.value})}/>
@@ -268,8 +261,7 @@ class Space_booking extends Component {
                     </div>
                 </Sidebar>
 
-                
-                <Sidebar visible={this.state.formBooking} style={{ height: 400 }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formBookingFalse: false })}>
+                <Sidebar visible={this.state.formBooking} style={{ height: '100%' }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formBookingFalse: false })}>
                     {/* <p>{this.state.notif}</p> */}
                     {/* <Button type="button" onClick={() => this.setState({ visibleBottom: true })} label="Save" className="ui-button-success" />
                     <Button type="button" onClick={() => this.setState({ visibleBottom: true })} label="Cancel" className="ui-button-secondary" /> */}
@@ -316,7 +308,6 @@ class Space_booking extends Component {
                         </div>
                     
                 </Sidebar>
-
 
             </div>
         );
