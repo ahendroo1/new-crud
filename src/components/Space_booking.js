@@ -67,6 +67,7 @@ class Space_booking extends Component {
                 this.setState({ visibleBottom: true, notif: 'Pilih tanggal sesudah tanggal mulai' });
                 
             } else if (an >= 0){
+
                 this.setState({ tot_day: an + 1, tot_harga: an * this.state.harga, visibleBottom: false, notif: 'Pilih tanggal sesudah tanggal mulai' });
             } 
         }
