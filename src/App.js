@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './App.css';
 // import logo from './logo.svg';
 // import './App.css';
@@ -7,6 +7,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Article from './components/Article';
+import Movie from './components/Movie';
+import Food from './components/Food';
 import Space_booking from './components/Space_booking';
 
 class App extends Component {
@@ -17,8 +19,10 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/article" component={Article} />
           <Route path="/space_booking" component={Space_booking} />
+          <Route path="/food" component={Food} />
+          <Route path="/movie" component={Movie}  />
         <Footer />
-
+ 
         {/* <Button label="Primary" />
         <Button label="Secondary" className="ui-button-secondary" />
         <Button label="Success" className="ui-button-success" />

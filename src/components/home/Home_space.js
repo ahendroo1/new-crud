@@ -5,7 +5,7 @@ class Home_space extends Component{
     render(){
         return(
                 <div>
-                    Content di Home Space
+                    <p>Content di Home Space</p>
                 </div>
         );
     }

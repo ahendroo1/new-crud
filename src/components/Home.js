@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Slider from 'react-animated-slider';
-import { Link, Route } from 'react-router-dom';
-import Home_space from './home/Home_space';
-import Home_cemiland from './home/Home_cemiland';
+// import Home_space from './home/Home_space';
 import 'react-animated-slider/build/horizontal.css';
 import './css/slider-animations.css';
 import './css/styles.css';
@@ -56,8 +54,7 @@ class Home extends Component {
                                 </div>
                             ))}
                         </Slider>
-                        <Home_space />
-                        <Home_cemiland />
+                        {/* <Home_space /> */}
 
                         </main>
                 </div>

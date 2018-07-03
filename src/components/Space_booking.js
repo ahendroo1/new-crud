@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
-import Header from './Header';
-import Footer from './Footer';
 // import axios from 'axios';
 // primeReact
 
-import { Accordion, AccordionTab } from 'primereact/components/accordion/Accordion';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/omega/theme.css';
 import 'font-awesome/css/font-awesome.css';
 import { Button } from 'primereact/components/button/Button';
 import { Calendar } from 'primereact/components/calendar/Calendar';
-import { Messages } from 'primereact/components/messages/Messages';
 import { Message } from 'primereact/components/message/Message';
 import { InputText } from 'primereact/components/inputtext/InputText';
 import classNames from 'classnames';
 import { Password } from 'primereact/components/password/Password';
 import { Sidebar } from "primereact/components/sidebar/Sidebar";
-import { Fieldset } from 'primereact/components/fieldset/Fieldset';
-import { ScrollPanel } from 'primereact/components/scrollpanel/ScrollPanel';
 import { ProgressBar } from 'primereact/components/progressbar/ProgressBar';
 import {Card} from 'primereact/components/card/Card';
 
@@ -60,27 +54,29 @@ class Space_booking extends Component {
 
         if (tgl1 == null) {
             // alert('Pilih Waktu mulai terlebih dahulu');
-            this.setState({ visibleBottom: true, notif: 'Pilih waktu Booking telebih dahulu' });
+            this.setState({ visibleBottom: true, notif:'Pilih waktu Booking telebih dahulu' });
+
+        } else {
+
+            var m = new Date(tgl1);
+            var s = new Date(tgl2);
+            var an = parseInt((s.getTime() - m.getTime()) / (24 * 3600 * 1000));
+
+            if (an < 0) {
+                // alert('Pilih tanggal sesudah tanggal mulai')
+                this.setState({ visibleBottom: true, notif: 'Pilih tanggal sesudah tanggal mulai' });
+                
+            } else if (an >= 0){
+                this.setState({ tot_day: an + 1, tot_harga: an * this.state.harga, visibleBottom: false, notif: 'Pilih tanggal sesudah tanggal mulai' });
+            } 
         }
 
-        var m = new Date(tgl1);
-        var s = new Date(tgl2);
-        var t1 = m.getTime();
-        var t2 = s.getTime();
-        var an = parseInt((t2 - t1) / (24 * 3600 * 1000));
-
-        if (an < 0) {
-            // alert('Pilih tanggal sesudah tanggal mulai')
-            this.setState({ visibleBottom: true, notif: 'Pilih tanggal sesudah tanggal mulai' });
-            
-        } else if (an >= 0){
-            this.setState({ tot_day: an + 1, tot_harga: an * this.state.harga, visibleBottom: false, notif: 'Pilih tanggal sesudah tanggal mulai' });
-        }
     }
 
     loginUser(){
 
-        if(this.state.uname_login == 'mau' && this.state.pass_login == 'buka'){
+        if(this.state.uname_login === 'mau' && this.state.pass_login === 'buka'){
+
             this.setState({login_status:true, formBooking: true,formLogin: false});
             
         }else{
@@ -95,7 +91,9 @@ class Space_booking extends Component {
         if(this.state.uname_login == null && this.state.pass_login == null ){
             
             this.setState({login_status:'Login Gagal...!!',formLogin: true});
+
         }else{
+            
             this.setState({login_status:true, formBooking: true});
         }
 
@@ -106,9 +104,9 @@ class Space_booking extends Component {
     }
 
     showBooking(){
-        if(this.state.login_status == true){
+        if(this.state.login_status === true){
             this.setState({ formBooking: true});
-        } else if (this.state.login_status == false) {
+        } else if (this.state.login_status === false) {
             this.setState({ formLogin: true });
         }
     }
@@ -127,9 +125,10 @@ class Space_booking extends Component {
         function convertToRupiah(angka) {
             var rupiah = '';
             var angkarev = angka.toString().split('').reverse().join('');
-            for (var i = 0; i < angkarev.length; i++) if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + '.';
+            for (var i = 0; i < angkarev.length; i++) if (i % 3 === 0) rupiah += angkarev.substr(i, 3) + '.';
             return 'Rp. ' + rupiah.split('', rupiah.length - 1).reverse().join('');
         }
+
         let validateInputClass = classNames({
             'ui-state-error': !this.state.validatePattern
         });
@@ -215,7 +214,7 @@ class Space_booking extends Component {
                         </span>
 
                         <span className="ui-float-label">
-                            <InputText keyfilter={/[^\s]/} id="float-input" keyfilter={/^[+-]?((\.\d+)|(\d+(\.\d+)?))$/} validateOnly={true} onInput={this.onValidateInput} type="text" className={validateInputClass} />
+                            <InputText id="float-input" keyfilter={/^[+-]?((\.\d+)|(\d+(\.\d+)?))$/} validateOnly={true} onInput={this.onValidateInput} type="text" className={validateInputClass} />
                             <label htmlFor="float-input">Nomor Telephone</label>
                             {!this.state.validatePattern && <Message severity="error" text="Nomor Telephone tidak Valid"></Message>}
                         </span>
@@ -275,7 +274,6 @@ class Space_booking extends Component {
                     <Button type="button" onClick={() => this.setWaktuMulai(this.state.date, this.state.date2)} label="Save" className="ui-button-secondary" /> */}
                     
                         <div className="panel_booking_content">
-
                             <label for="ContactFormEmail" class="">Waktu Mulai</label><br />
                             <div class="input-field">
                                 <Calendar
@@ -294,9 +292,8 @@ class Space_booking extends Component {
                                 <Calendar
                                     className="datepicker"
                                     dateFormat="dd mm yy"
-                                    className="datepicker"
                                     value={this.state.date2}
-                                    onChange={(e) => { this.setState({ date2: e.value }), this.estimate(this.state.date, e.value) }}
+                                    onChange={(e) => { this.setState({ date2: e.value }); this.estimate(this.state.date, e.value) }}
                                 ></Calendar>
                                 {/* <Button label="Click" icon="fa-check" onClick={() => {this.estimate()}} /> */}
                             </div>

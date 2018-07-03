@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {Sidebar} from 'primereact/components/sidebar/Sidebar';
-import {Accordion,AccordionTab} from 'primereact/components/accordion/Accordion';
-import {TabView,TabPanel} from 'primereact/components/tabview/TabView';
-import {Button} from 'primereact/components/button/Button';
-import {SplitButton} from 'primereact/components/splitbutton/SplitButton';
 
 class Header extends Component {
 
@@ -25,7 +21,6 @@ class Header extends Component {
                 window.location.hash="/fileupload"
             }}
         ];
-
     }
 
     render(){
@@ -42,6 +37,15 @@ class Header extends Component {
                         <Link to="/article" class="site-nav__link" onClick={() => this.setState({visibleLeft:false})} >
                             <p className="nav-menu-site-offis">Article </p>
                         </Link>
+                        
+                        <Link to="/food" class="site-nav__link" onClick={() => this.setState({visibleLeft:false})} >
+                            <p className="nav-menu-site-offis">Food </p>
+                        </Link>
+                        
+                        <Link to="/movie" class="site-nav__link" onClick={() => this.setState({visibleLeft:false})} >
+                            <p className="nav-menu-site-offis">Movie </p>
+                        </Link>
+
                     </Sidebar>
                     <nav class="nav-extended">
                         <div class="nav-background">
@@ -62,12 +66,21 @@ class Header extends Component {
                                 <li class="site-nav--active">
                                     <Link to="/" class="site-nav__link">Home</Link>
                                 </li>
+
                                 <li class="site-nav--active">
                                     <Link to="/space_booking" class="site-nav__link">Space</Link>
                                 </li>
 
                                 <li class="site-nav--active">
                                     <Link to="/article" class="site-nav__link">Article</Link>
+                                </li>
+                                
+                                <li class="site-nav--active">
+                                    <Link to="/food" class="site-nav__link">Food</Link>
+                                </li>
+                                
+                                <li class="site-nav--active">
+                                    <Link to="/movie" class="site-nav__link">Movie</Link>
                                 </li>
 
                                 {/* <li>
@@ -94,12 +107,12 @@ class Header extends Component {
                             </ul>
                         </div>
 
-                        <div class="nav-header center">
+                        {/* <div class="nav-header center">
 
                             <h1>Offis Coworking Space </h1>
                             <div class="tagline">Tempat Anda Berkarya</div>
 
-                        </div>
+                        </div> */}
                     </nav>
 
                     {/* <div data-section-id="header" data-section-type="header-section">
