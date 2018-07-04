@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
 // primeReact
-
+import axios from 'axios';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/omega/theme.css';
 import 'font-awesome/css/font-awesome.css';
@@ -14,6 +14,7 @@ import { Password } from 'primereact/components/password/Password';
 import { Sidebar } from "primereact/components/sidebar/Sidebar";
 import { ProgressBar } from 'primereact/components/progressbar/ProgressBar';
 import {Card} from 'primereact/components/card/Card';
+
 
 class Space_booking extends Component {
     
@@ -91,11 +92,27 @@ class Space_booking extends Component {
 
         if(this.state.uname_login == null && this.state.pass_login == null ){
             
-            this.setState({login_status:'Login Gagal...!!',formLogin: true});
+            this.setState({login_status:'Register Gagal...!!',formLogin: true});
 
         }else{
+
+            axios.post('http://localhost:3210/reg_user', {
+
+                nama_lengkap: this.state.uname_login,
+                email: this.refs.email,
+                no_telp: this.refs.no_telp,
+                password: this.refs.password_reg
+
+            }).then((response) => {
+                
+                this.setState({login_status:true, formBooking: true});
+                // // console.log(response);
+                // this.state.data_karyawan.push(response.data);
+                
+                // this.changeDatakaryawan();
+
+            })
             
-            this.setState({login_status:true, formBooking: true});
         }
 
     }
@@ -205,23 +222,23 @@ class Space_booking extends Component {
                     <div className="panel_booking_content">
                     
                         <span className="ui-float-label">
-                            <InputText keyfilter="alphanum" id="float-input" type="text" onChange={(e) => this.setState({nama_register: e.target.value})} />
+                            <InputText keyfilter="alphanum" ref="nama_lengkap" id="float-input" type="text" onChange={(e) => this.setState({nama_register: e.target.value})} />
                             <label htmlFor="float-input">Nama Lengkap</label>
                         </span>
 
                         <span className="ui-float-label">
-                            <InputText keyfilter={/[^\s]/} id="float-input" type="text" onChange={(e) => this.setState({uname_login: e.target.value})} />
+                            <InputText keyfilter={/[^\s]/} ref="email" id="float-input" type="text" onChange={(e) => this.setState({uname_login: e.target.value})} />
                             <label htmlFor="float-input">Email</label>
                         </span>
 
                         <span className="ui-float-label">
-                            <InputText id="float-input" keyfilter={/^[+-]?((\.\d+)|(\d+(\.\d+)?))$/} validateOnly={true} onInput={this.onValidateInput} type="text" className={validateInputClass} />
+                            <InputText id="float-input" ref="no_telp" keyfilter={/^[+-]?((\.\d+)|(\d+(\.\d+)?))$/} validateOnly={true} onInput={this.onValidateInput} type="text" className={validateInputClass} />
                             <label htmlFor="float-input">Nomor Telephone</label>
                             {!this.state.validatePattern && <Message severity="error" text="Nomor Telephone tidak Valid"></Message>}
                         </span>
 
                         <span className="ui-float-label">
-                            <Password value={this.state.pass_login} onChange={(e) => this.setState({pass_login: e.target.value})} />
+                            <Password value={this.state.pass_login} ref="password_reg" onChange={(e) => this.setState({pass_login: e.target.value})} />
                             <label htmlFor="float-input">Password</label>
                         </span>
 
