@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Card} from 'primereact/components/card/Card';
 
-class Article extends Component {
+class Movie extends Component {
 
     constructor() {
         super();
@@ -12,10 +12,8 @@ class Article extends Component {
         }
     }
 
-
     componentDidMount() {
-      
-        
+    
         axios.get('https://api.themoviedb.org/3/discover/movie?api_key=70019597619c8491d3d89055a06e87ee')
         .then((ambilData) => {
           console.log(ambilData.data.results);
@@ -30,7 +28,7 @@ class Article extends Component {
 
         const dataMovie = this.state.movie.map((item, index) => {
             var judul = item.title;
-            var overview = item.overview;
+            var release = item.release_date;
             // var img = 'https://image.tmdb.org/t/p/w500'+item.backdrop_path;
             
             let header = <img alt="bjhsx" src={'https://image.tmdb.org/t/p/w500'+item.backdrop_path}/>;
@@ -42,7 +40,7 @@ class Article extends Component {
                 // </li>
                 
                 <div className="ui-g-12 ui-md-6 ui-lg-3" key={index} >
-                    <Card title={judul} subtitle={overview} style={{width: '100%'}} className="ui-card-shadow " header={header}>
+                    <Card title={judul} subtitle={release} style={{width: '100%'}} className="ui-card-shadow " header={header}>
                         
                     </Card>
                 </div>
@@ -52,13 +50,15 @@ class Article extends Component {
       
         return (
             <div className="Movie">
-                <h1>Ini Movie</h1>
-                <div class="container">
-                    {dataMovie}
-                </div>
+                <center>
+                    <h1>Tayang di Bioskop</h1>
+                    <div class="container">
+                        {dataMovie}
+                    </div>
+                </center>
             </div>
         );
     }
 }
 
-export default Article;
+export default Movie;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Card} from 'primereact/components/card/Card';
 
-class Article extends Component {
+class Food extends Component {
 
     constructor() {
         super();
@@ -75,4 +75,4 @@ class Article extends Component {
     }
 }
 
-export default Article;
+export default Food;
