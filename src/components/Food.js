@@ -33,6 +33,7 @@ class Article extends Component {
             var nama = item.restaurant.name;
             var alamat = item.restaurant.location.address;
             // var foto = item.restaurant.thumb;
+            
             let header = <img alt={nama} src={item.restaurant.thumb}/>;
             return (
             // <li key="index">
@@ -41,31 +42,34 @@ class Article extends Component {
             // <img src={foto} alt=""/>
             // </li>item.restaurant.thumb
             
-            <div class="col-xs-12 col-md-6 col-lg-2" key="index">
+            <div className="ui-g-12 ui-md-6 ui-lg-3" key={index} >
                 <Card title={nama} subtitle={alamat} style={{width: '100%'}} className="ui-card-shadow " header={header}>
                     
                 </Card>
             </div>
 
-            )  
+            )
         })
 
         return (
             <div className="Article">
 
-                <h1> Madiun  Food</h1>
                 <center>
+                <h1> Madiun Food</h1>
                     {/* <h1>
                     
                     </h1> */}
                     {/* <button onClick={() => {this.klikZomato()}} className="btn btn-success">Get Data</button> */}
                     
-                    {dataResto}
+                    <div class="container">
+                        {dataResto}
+                    </div>
                     
                     {/* <table>
                     {dataResto}
                     </table> */}
                 </center>
+                <hr />
             </div>
         );
     }
