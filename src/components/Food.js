@@ -43,12 +43,10 @@ class Article extends Component {
             
             <div class="col-xs-12 col-md-6 col-lg-2" key="index">
                 <Card title={nama} subtitle={alamat} style={{width: '100%'}} className="ui-card-shadow " header={header}>
-                    <div>
-                        {/* <h2>{nama}</h2> */}
-                        {/* <p>{alamat}</p> */}
-                    </div>
+                    
                 </Card>
             </div>
+
             )  
         })
 
@@ -60,8 +58,6 @@ class Article extends Component {
                     {/* <h1>
                     
                     </h1> */}
-                    <p>{this.state.inputUser}</p>
-                    <input ref="input" type="text" onInput={() => {this.setState({inputUser: this.refs.input.value})}}></input>
                     {/* <button onClick={() => {this.klikZomato()}} className="btn btn-success">Get Data</button> */}
                     
                     {dataResto}
