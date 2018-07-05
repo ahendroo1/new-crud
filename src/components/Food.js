@@ -9,11 +9,18 @@ class Food extends Component {
         this.state = {
           resto: [],
           inputUser: '',
+          makanan: 'Madiun'
         }
     }
 
     componentDidMount() {
-        var urlUser = `https://developers.zomato.com/api/v2.1/search?q=madiun`;
+        this.cari_zomato();
+    }
+
+    cari_zomato(makanan){
+        this.setState({makanan: this.refs.makanan.value})
+    
+        var urlUser = 'https://developers.zomato.com/api/v2.1/search?q=' + this.state.makanan;
         var config = {
           headers: {'user-key' :'5c93a9595788cb334cb5832209121070'}
         }
@@ -23,6 +30,7 @@ class Food extends Component {
           console.log(ambilData.data.restaurants);
           this.setState({
             resto: ambilData.data.restaurants,
+            
           })
         })
     }
@@ -54,21 +62,24 @@ class Food extends Component {
         return (
             <div className="Article">
 
-                <center>
-                <h1> Madiun Food</h1>
-                    {/* <h1>
+                {/* <h1>
+                
+                </h1> */}
+                {/* <button onClick={() => {this.klikZomato()}} className="btn btn-success">Get Data</button> */}
+                
+                <div class="container">
+
+                    <h5>{this.state.makanan} Food</h5>
+                    <input type="text" value={this.state.makanan} ref="makanan" onChange={(e)=> this.cari_zomato(e.value)} placeholder="Cari Lokasi dan Makanan" />
                     
-                    </h1> */}
-                    {/* <button onClick={() => {this.klikZomato()}} className="btn btn-success">Get Data</button> */}
-                    
-                    <div class="container">
-                        {dataResto}
-                    </div>
-                    
-                    {/* <table>
-                    {dataResto}
-                    </table> */}
-                </center>
+                    <center>
+                            {dataResto}
+                    </center>
+                </div>
+                
+                {/* <table>
+                {dataResto}
+                </table> */}
                 <hr />
             </div>
         );

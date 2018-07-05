@@ -23,7 +23,6 @@ class Movie extends Component {
         })
     }
 
-
     render() {
 
         const dataMovie = this.state.movie.map((item, index) => {
@@ -50,12 +49,12 @@ class Movie extends Component {
       
         return (
             <div className="Movie">
-                <center>
-                    <h1>Tayang di Bioskop</h1>
                     <div class="container">
-                        {dataMovie}
+                        <center>
+                            <h1>Offis Recomended Movie</h1>
+                                {dataMovie}
+                        </center>
                     </div>
-                </center>
             </div>
         );
     }
