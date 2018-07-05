@@ -40,6 +40,15 @@ class Space_booking extends Component {
         };
     }
 
+    componentDidMount(){
+        axios.get('http://localhost:3210/get_data_user')
+        .then((response) => {
+            
+            console.log(response)
+
+        })
+    }
+
     estimate(tgl1, tgl2) {
         
         // var m = this.refs.tgl_mulai.value;
@@ -90,21 +99,21 @@ class Space_booking extends Component {
 
     registerNow(){
 
-        if(this.state.uname_login == null && this.state.pass_login == null ){
+        if(this.refs.email.value === "" && this.refs.password_reg.value === "" ){
             
             this.setState({login_status:'Register Gagal...!!',formLogin: true});
 
         }else{
+            console.log('else')
+            axios.post('http://localhost:3210/registrasi_user', {
 
-            axios.post('http://localhost:3210/reg_user', {
-
-                nama_lengkap: this.state.uname_login,
-                email: this.refs.email,
-                no_telp: this.refs.no_telp,
-                password: this.refs.password_reg
+                nama_lengkap: this.refs.nama_lengkap.value,
+                email: this.refs.email.value,
+                no_telp: this.refs.no_telp.value,
+                password: this.refs.password_reg.value
 
             }).then((response) => {
-                
+                console.log(response);
                 this.setState({login_status:true, formBooking: true});
                 // // console.log(response);
                 // this.state.data_karyawan.push(response.data);
@@ -222,12 +231,12 @@ class Space_booking extends Component {
                     <div className="panel_booking_content">
                     
                         <span className="ui-float-label">
-                            <InputText keyfilter="alphanum" ref="nama_lengkap" id="float-input" type="text" onChange={(e) => this.setState({nama_register: e.target.value})} />
+                            <InputText keyfilter="alphanum" ref="nama_lengkap" id="float-input" type="text"  />
                             <label htmlFor="float-input">Nama Lengkap</label>
                         </span>
 
                         <span className="ui-float-label">
-                            <InputText keyfilter={/[^\s]/} ref="email" id="float-input" type="text" onChange={(e) => this.setState({uname_login: e.target.value})} />
+                            <InputText keyfilter={/[^\s]/} ref="email" id="float-input" type="text"  />
                             <label htmlFor="float-input">Email</label>
                         </span>
 
@@ -238,7 +247,7 @@ class Space_booking extends Component {
                         </span>
 
                         <span className="ui-float-label">
-                            <Password value={this.state.pass_login} ref="password_reg" onChange={(e) => this.setState({pass_login: e.target.value})} />
+                            <Password ref="password_reg" />
                             <label htmlFor="float-input">Password</label>
                         </span>
 
