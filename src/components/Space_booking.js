@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import axios from 'axios';
 // primeReact
 import axios from 'axios';
+
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/omega/theme.css';
 import 'font-awesome/css/font-awesome.css';
@@ -14,7 +15,7 @@ import { Password } from 'primereact/components/password/Password';
 import { Sidebar } from "primereact/components/sidebar/Sidebar";
 import { ProgressBar } from 'primereact/components/progressbar/ProgressBar';
 import {Card} from 'primereact/components/card/Card';
-
+import { Growl } from 'primereact/components/growl/Growl';
 
 class Space_booking extends Component {
     
@@ -79,9 +80,8 @@ class Space_booking extends Component {
             } else if (an >= 0){
 
                 this.setState({ tot_day: an + 1, tot_harga: an * this.state.harga, visibleBottom: false, notif: 'Pilih tanggal sesudah tanggal mulai' });
-            } 
+            }
         }
-
     }
 
     loginUser(){
@@ -99,31 +99,52 @@ class Space_booking extends Component {
 
     registerNow(){
 
-        if(this.refs.email.value === "" && this.refs.password_reg.value === "" ){
+        if(this.state.reg_email === "" && this.state.reg_password === "" ){
             
             this.setState({login_status:'Register Gagal...!!',formLogin: true});
 
         }else{
-            console.log('else')
-            axios.post('http://localhost:3210/registrasi_user', {
+          
+            axios.post('http://localhost:3210/cek_user_registrasi', {
+                nama_lengkap: this.state.reg_nama_lengkap,
+                email: this.state.reg_email,
+                no_telp: this.state.reg_no_telp,
+                password: this.state.reg_password
+            })
+            .then((response_cari) => {
+                console.log(response_cari)
+                if(response_cari.data.length === 0){
+                    
+                    axios.post('http://localhost:3210/register_add_user', {
+                        nama_lengkap: this.state.reg_nama_lengkap,
+                        email: this.state.reg_email,
+                        no_telp: this.state.reg_no_telp,
+                        password: this.state.reg_password
+                    }).then((respond_add) => {
+                        console.log(respond_add.config.data)
+                        this.growl.show({severity:'success', summary:'Berhasil', detail:'Registrasi anda berhasil'});
+                        this.setState({user_login_success: respond_add.config.data, login_status:true, formBooking: true})
+                    })
+                    
+                }else{
 
-                nama_lengkap: this.refs.nama_lengkap.value,
-                email: this.refs.email.value,
-                no_telp: this.refs.no_telp.value,
-                password: this.refs.password_reg.value
+                    this.growl.show({severity:'error', summary:'Gagal', detail:'Registrasi anda gagal', sticky: true});
 
-            }).then((response) => {
-                console.log(response);
-                this.setState({login_status:true, formBooking: true});
+                }
+                // if(response.insertedCount === 1){
+                //     this.setState({login_status:true, formBooking: true});
+                // }else{
+
+                //     this.setState({login_status:true, formBooking: true});
+
+                // }
                 // // console.log(response);
                 // this.state.data_karyawan.push(response.data);
                 
                 // this.changeDatakaryawan();
 
             })
-            
         }
-
     }
 
     showBookingProgresh(){
@@ -131,11 +152,13 @@ class Space_booking extends Component {
     }
 
     showBooking(){
+
         if(this.state.login_status === true){
             this.setState({ formBooking: true});
         } else if (this.state.login_status === false) {
             this.setState({ formLogin: true });
         }
+
     }
 
     setWaktuMulai(tgl1, tgl2){
@@ -228,26 +251,27 @@ class Space_booking extends Component {
                     ></Calendar>
                     <Button type="button" onClick={() => this.setWaktuMulai(this.state.date, this.state.date2)} label="Save" className="ui-button-secondary" /> */}
                    
+                    <Growl ref={(el) => this.growl = el} />
                     <div className="panel_booking_content">
                     
                         <span className="ui-float-label">
-                            <InputText keyfilter="alphanum" ref="nama_lengkap" id="float-input" type="text"  />
+                            <InputText keyfilter="alphanum" value={this.state.reg_nama_lengkap} onChange={(e) => this.setState({reg_nama_lengkap: e.target.value})} id="float-input" type="text"  />
                             <label htmlFor="float-input">Nama Lengkap</label>
                         </span>
 
                         <span className="ui-float-label">
-                            <InputText keyfilter={/[^\s]/} ref="email" id="float-input" type="text"  />
+                            <InputText keyfilter={/[^\s]/} value={this.state.reg_email} onChange={(e) => this.setState({reg_email: e.target.value})}  id="float-input" type="text"  />
                             <label htmlFor="float-input">Email</label>
                         </span>
 
                         <span className="ui-float-label">
-                            <InputText id="float-input" ref="no_telp" keyfilter={/^[+-]?((\.\d+)|(\d+(\.\d+)?))$/} validateOnly={true} onInput={this.onValidateInput} type="text" className={validateInputClass} />
+                            <InputText id="float-input" value={this.state.reg_no_telp}  onChange={(e) => this.setState({reg_no_telp: e.target.value})}  keyfilter={/^[+-]?((\.\d+)|(\d+(\.\d+)?))$/} validateOnly={true} onInput={this.onValidateInput} type="text" className={validateInputClass} />
                             <label htmlFor="float-input">Nomor Telephone</label>
                             {!this.state.validatePattern && <Message severity="error" text="Nomor Telephone tidak Valid"></Message>}
                         </span>
 
                         <span className="ui-float-label">
-                            <Password ref="password_reg" />
+                            <Password ref="password_reg" value={this.state.reg_password} onChange={(e) => this.setState({reg_password: e.target.value})}  />
                             <label htmlFor="float-input">Password</label>
                         </span>
 
@@ -272,7 +296,7 @@ class Space_booking extends Component {
                         </span>
 
                         <div className="col-size-0 col-xs-8 col-lg-6">
-                            <small>Belum punya akun ? <a type="button" onClick={() => this.setState({formRegistrasi:true,})} >Daftar</a></small>
+                            <small>Belum punya akun ? <a type="button" onClick={(e) => this.setState({formRegistrasi:true,})} >Daftar</a></small>
                         </div>
 
                         <div className="col-size-0 col-xs-4 col-lg-6">
@@ -300,6 +324,7 @@ class Space_booking extends Component {
                     ></Calendar>
                     <Button type="button" onClick={() => this.setWaktuMulai(this.state.date, this.state.date2)} label="Save" className="ui-button-secondary" /> */}
                     
+                        <Growl ref={(el) => this.growl = el} />
                         <div className="panel_booking_content">
                             <label for="ContactFormEmail" class="">Waktu Mulai</label><br />
                             <div class="input-field">
