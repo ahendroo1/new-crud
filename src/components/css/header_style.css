@@ -1,0 +1,19 @@
+.img-user-header{
+    width: 50px;
+    padding:5px ;
+    border-radius: 50px;
+}
+.header-mobile-user-profile{
+    background-color: goldenrod ;
+    
+}
+.form-reg{
+    padding-top: 70px;
+}
+.social-btn-position{
+    margin-top: 5px;
+    text-align: center ;
+}
+.social-btn-position span{
+    padding-left: 20px;
+}

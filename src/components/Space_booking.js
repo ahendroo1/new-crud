@@ -14,8 +14,10 @@ import classNames from 'classnames';
 import { Password } from 'primereact/components/password/Password';
 import { Sidebar } from "primereact/components/sidebar/Sidebar";
 import { ProgressBar } from 'primereact/components/progressbar/ProgressBar';
-import {Card} from 'primereact/components/card/Card';
+import { Card } from 'primereact/components/card/Card';
 import { Growl } from 'primereact/components/growl/Growl';
+import { provider, auth } from './../fire';
+
 
 class Space_booking extends Component {
     
@@ -36,18 +38,47 @@ class Space_booking extends Component {
                         value1: 0,
                         value2: 50,
                         uname_login: null,
-                        pass_login: null
+                        pass_login: null,
+                        data_space: []
                         // visibleTop: false,
         };
     }
 
-    componentDidMount(){
-        axios.get('http://localhost:3210/get_data_user')
-        .then((response) => {
-            
-            console.log(response)
+    async login() {
 
+        const result = await auth().signInWithPopup(provider); 
+        this.setState({user: result.user});
+    }
+
+    async logout(){
+        await auth().signOut()
+        this.setState({user: null}); 
+    }
+
+    componentDidMount(){
+        // axios.get('http://localhost:3210/get_data_user')
+        // .then((response) => {
+            
+        //     console.log(response)
+
+        // })
+
+        axios.get('http://localhost:3210/api/show_data_space')
+        .then((response)=>{
+            console.log(response)
+            this.setState({data_space: response.data})
         })
+
+        axios.get('http://localhost:3210/api/cek_session/user',)
+        .then((response_session)=>{
+            console.log(response_session)
+        })
+        
+        // let header_2 = <img alt="Card" src='https://ri2hb3j6fh-flywheel.netdna-ssl.com/mission-valley/wp-content/uploads/sites/11/2016/07/Coworking-Space.jpg'/>;
+        // let footer_2 = <span>
+        //                     <Button label="Booking Now"  onClick={() => this.showBooking()} icon="fa-check" className="ui-button-secondary"/>
+        //                 </span>;   
+
     }
 
     estimate(tgl1, tgl2) {
@@ -104,33 +135,34 @@ class Space_booking extends Component {
             this.setState({login_status:'Register Gagal...!!',formLogin: true});
 
         }else{
-          
-            axios.post('http://localhost:3210/cek_user_registrasi', {
-                nama_lengkap: this.state.reg_nama_lengkap,
+
+            axios.post('http://localhost:3210/api/cek_user_registrasi', {
+                
                 email: this.state.reg_email,
-                no_telp: this.state.reg_no_telp,
-                password: this.state.reg_password
             })
             .then((response_cari) => {
-                console.log(response_cari)
+                // console.log(response_cari)
                 if(response_cari.data.length === 0){
                     
-                    axios.post('http://localhost:3210/register_add_user', {
+                    axios.post('http://localhost:3210/api/register_add_user', {
                         nama_lengkap: this.state.reg_nama_lengkap,
                         email: this.state.reg_email,
                         no_telp: this.state.reg_no_telp,
                         password: this.state.reg_password
                     }).then((respond_add) => {
-                        console.log(respond_add.config.data)
+                        // console.log(respond_add.config.data)
+                        
                         this.growl.show({severity:'success', summary:'Berhasil', detail:'Registrasi anda berhasil'});
-                        this.setState({user_login_success: respond_add.config.data, login_status:true, formBooking: true})
-                    })
+                        this.setState({user_login_success: respond_add.config.data, login_status:true, formBooking: true, formLogin: false})
                     
+                    })
+
                 }else{
 
                     this.growl.show({severity:'error', summary:'Gagal', detail:'Registrasi anda gagal', sticky: true});
 
                 }
+
                 // if(response.insertedCount === 1){
                 //     this.setState({login_status:true, formBooking: true});
                 // }else{
@@ -151,12 +183,12 @@ class Space_booking extends Component {
         this.setState({ sendBooking: true });
     }
 
-    showBooking(){
-
+    showBooking(id_space, nama_space){
+        // console.log()
         if(this.state.login_status === true){
-            this.setState({ formBooking: true});
+            this.setState({ formBooking: true, id_space: id_space, nama_space: nama_space+' Dipilih' });
         } else if (this.state.login_status === false) {
-            this.setState({ formLogin: true });
+            this.setState({ formLogin: true, id_space: id_space, nama_space: nama_space+' Dipilih'  });
         }
 
     }
@@ -183,16 +215,17 @@ class Space_booking extends Component {
             'ui-state-error': !this.state.validatePattern
         });
 
-        let header_menu_space = <img alt="Card" src='http://www.asianentrepreneur.org/wp-content/uploads/2018/04/Perm-Desk-1024x681.png'/>;
-        let footer_menu_space = <span>
-                                    <Button label="Booking Now"  onClick={() => this.showBooking()} icon="fa-check" className="ui-button-secondary"/>
-                                </span>;
+        let data_space_generate = this.state.data_space.map((col,i) => {
+            let img_space = <img alt={col.nama} src={col.img}/>;
+            let button_space = <span> <Button label="Booking Now"  onClick={() => this.showBooking(col.id_, col.nama)} icon="fa-check" className="ui-button-secondary"/> </span>;
+            return  <div key={col.id_} class="col-xs-12 col-md-6 col-lg-4 col"><Card title={col.nama} subtitle="Sub" style={{width: '100%'}} className="ui-card-shadow " footer={button_space} header={img_space}><div> {col.deskripsi} </div></Card></div> ;
+            
+        });
         
-        let header_2 = <img alt="Card" src='https://ri2hb3j6fh-flywheel.netdna-ssl.com/mission-valley/wp-content/uploads/sites/11/2016/07/Coworking-Space.jpg'/>;
-        let footer_2 = <span>
-                                    <Button label="Booking Now"  onClick={() => this.showBooking()} icon="fa-check" className="ui-button-secondary"/>
-                                </span>;        
-
+        // let header_2 = <img alt="Card" src='https://ri2hb3j6fh-flywheel.netdna-ssl.com/mission-valley/wp-content/uploads/sites/11/2016/07/Coworking-Space.jpg'/>;
+        // let footer_2 = <span>
+        //                             <Button label="Booking Now"  onClick={() => this.showBooking()} icon="fa-check" className="ui-button-secondary"/>
+        //                         </span>;
         return (
 
             <div className="Space_booking">
@@ -200,35 +233,15 @@ class Space_booking extends Component {
 
                     <h5>Coworking Space</h5>
                     <hr />
-                        <div class="col-xs-12 col-md-6 col-lg-4 col">
+                        {/* <div class="col-xs-12 col-md-6 col-lg-4 col">
                             <Card title="Advanced Card" subtitle="Subtitle" style={{width: '100%'}} className="ui-card-shadow " footer={footer_menu_space} header={header_menu_space}>
                                 <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                                     quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
                                 </div>
                             </Card>
-                        </div>
-                        <div class="col-xs-12 col-md-6 col-lg-4 col">
-                            <Card title="Advanced Card" subtitle="Subtitle" style={{width: '100%'}} className="ui-card-shadow " footer={footer_2} header={header_2}>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                                    quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
-                                </div>
-                            </Card>
-                        </div>
-                       
-                        <div class="col-xs-12 col-md-6 col-lg-4 col">
-                            <Card title="Advanced Card" subtitle="Subtitle" style={{width: '100%'}} className="ui-card-shadow " footer={footer_menu_space} header={header_menu_space}>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                                    quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
-                                </div>
-                            </Card>
-                        </div>
-                        <div class="col-xs-12 col-md-6 col-lg-4 col">
-                            <Card title="Advanced Card" subtitle="Subtitle" style={{width: '100%'}} className="ui-card-shadow " footer={footer_2} header={header_2}>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                                    quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
-                                </div>
-                            </Card>
-                        </div>
+                        </div> */}
+                        {data_space_generate}
+                        
                        
                 </div>
 
@@ -238,7 +251,7 @@ class Space_booking extends Component {
                 </Sidebar>
 
                 {/* Registrasi Form  */}
-                <Sidebar visible={this.state.formRegistrasi} style={{ height: 350 }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formRegistrasi: false })}>
+                <Sidebar visible={this.state.formRegistrasi} style={{ height: 350 }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formRegistrasi: false, formLogin: false })}>
                     {/* <p>{this.state.notif}</p> */}
                     {/* <Button type="button" onClick={() => this.setState({ visibleBottom: true })} label="Save" className="ui-button-success" />
                     <Button type="button" onClick={() => this.setState({ visibleBottom: true })} label="Cancel" className="ui-button-secondary" /> */}
@@ -285,6 +298,8 @@ class Space_booking extends Component {
 
                         <h5>Login Member</h5>
                         <p>{this.state.login_status}</p>
+                        <p>{this.state.nama_space}</p>
+                        <p>{this.state.user}</p>
                         <span className="ui-float-label">
                             <InputText onChange={(e) => this.setState({uname_login: e.target.value})}/>
                             <label htmlFor="float-input">Username</label>
@@ -305,7 +320,7 @@ class Space_booking extends Component {
                         
                         <div className="col-size-0 col-xs-12 col-lg-12">
                             <p>Login dengan :</p>
-                            <Button type="button" className="ui-button-danger" style={{width:'48%'}} ><i className="fa fa-google-plus"></i> Google</Button>
+                            <Button type="button" className="ui-button-danger"  onClick={this.login.bind(this)} style={{width:'48%'}} ><i className="fa fa-google-plus"></i> Google</Button>
                             <Button type="button" className="ui-button-primary" style={{width:'48%'}} ><i className="fa fa-facebook"></i> Facebook</Button>
                         </div>
                     </div>

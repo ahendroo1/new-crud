@@ -3,12 +3,14 @@ import { Route } from 'react-router-dom';
 import './App.css';
 // import logo from './logo.svg';
 // import './App.css';
+//  css 
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Article from './components/Article';
 import Movie from './components/Movie';
 import Food from './components/Food';
+import Tentang from './components/Tentang';
 import Space_booking from './components/Space_booking';
 // import fire from './fire';
 // import firebase from 'firebase';
@@ -42,6 +44,7 @@ class App extends Component {
           <Route path="/space_booking" component={Space_booking} />
           <Route path="/food" component={Food} />
           <Route path="/movie" component={Movie}  />
+          <Route path="/tentang" component={Tentang}  />
           {/* <form onSubmit={this.addMessage.bind(this)}>
           <input type="text" ref={ el => this.inputEl = el }/> <input type="submit"/>
           </form>
