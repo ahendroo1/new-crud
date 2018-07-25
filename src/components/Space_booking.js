@@ -18,7 +18,6 @@ import { Card } from 'primereact/components/card/Card';
 import { Growl } from 'primereact/components/growl/Growl';
 import { provider, auth } from './../fire';
 
-
 class Space_booking extends Component {
     
     constructor(proops) {
@@ -71,6 +70,7 @@ class Space_booking extends Component {
 
         axios.get('http://localhost:3210/api/cek_session/user',)
         .then((response_session)=>{
+            
             console.log(response_session)
         })
         
