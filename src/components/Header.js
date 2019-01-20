@@ -74,11 +74,6 @@ class Header extends Component {
 
                     <Sidebar visible={this.state.visibleLeft} baseZIndex={1000000} onHide={() => this.setState({visibleLeft: false})}>
                         
-                        <Link to="/movie" class="site-nav__link" onClick={() => this.setState({visibleLeft:false})} className="header-mobile-user-profile">
-                            <img src="https://img.okeinfo.net/content/2016/06/26/6/1425774/antoine-griezmann-man-of-the-match-laga-prancis-vs-republik-irlandia-H3TKB1KsUx.jpg" className="img-user-header" />
-                            <p className="nav-menu-site-offis">Antoni Grisman </p>
-                        </Link>
-
                         {/* <Link class="site-nav__link" onClick={(e) => this.setState({visibleFullScreen:true})} >
                             <p className="nav-menu-site-offis">Login or Signup </p>
                         </Link> */}
@@ -87,27 +82,7 @@ class Header extends Component {
                             <p className="nav-menu-site-offis">Home </p>
                         </Link>
                         <Link to="/space_booking" class="site-nav__link" onClick={() => this.setState({visibleLeft:false})} >
-                            <p className="nav-menu-site-offis">Space </p>
-                        </Link>
-                        <Link to="/article" class="site-nav__link" onClick={() => this.setState({visibleLeft:false})} >
-                            <p className="nav-menu-site-offis">Article </p>
-                        </Link>
-                        
-                        <Link to="/food" class="site-nav__link" onClick={() => this.setState({visibleLeft:false})} >
-                            <p className="nav-menu-site-offis">Food </p>
-                        </Link>
-                        
-                        <Link to="/movie" class="site-nav__link" onClick={() => this.setState({visibleLeft:false})} >
-                            <p className="nav-menu-site-offis">Movie </p>
-                        </Link>
-
-                        <Link to="/tentang" class="site-nav__link" onClick={() => this.setState({visibleLeft:false})} >
-                            <p className="nav-menu-site-offis">Tentang Kami </p>
-                        </Link>
-
-                        
-                        <Link to="/kontak" class="site-nav__link" onClick={() => this.setState({visibleLeft:false})} >
-                            <p className="nav-menu-site-offis">Kontak </p>
+                            <p className="nav-menu-site-offis">Tools </p>
                         </Link>
 
 
@@ -120,7 +95,7 @@ class Header extends Component {
                         </div>
 
                         <div class="nav-wrapper container">
-                            <a href="" itemprop="url" class="brand-logo site-logo">Offis </a>
+                            <a href="" itemprop="url" class="brand-logo site-logo">Kumparan </a>
 
                             <a data-activates="nav-mobile" onClick={() => this.setState({visibleLeft:true})} class="button-collapse">
                                 <i class="material-icons">menu</i>
@@ -128,43 +103,15 @@ class Header extends Component {
 
                             <ul class="right hide-on-med-and-down">
                                 
-
                                 <li class="site-nav--active">
                                     <Link to="/" class="site-nav__link">Home</Link>
                                 </li>
 
                                 <li class="site-nav--active">
-                                    <Link to="/space_booking" class="site-nav__link">Space</Link>
+                                    <Link to="/tools" class="site-nav__link">Tools</Link>
                                 </li>
 
-                                <li class="site-nav--active">
-                                    <Link to="/article" class="site-nav__link">Article</Link>
-                                </li>
                                 
-                                <li class="site-nav--active">
-                                    <Link to="/food" class="site-nav__link">Food</Link>
-                                </li>
-                                
-                                <li class="site-nav--active">
-                                    <Link to="/movie" class="site-nav__link">Movie</Link>
-                                </li>
-                                <li class="site-nav--active">
-                                    <Link to="/tentang" class="site-nav__link">Tentang Kami</Link>
-                                </li>
-                                <li class="site-nav--active">
-                                    <Link to="/kontak" class="site-nav__link">Kontak</Link>
-                                </li>
-
-                                <li class="site-nav--active">
-                                    <a onClick={(e) => this.setState({visibleFullScreen:true})} class="site-nav__link">Login</a>
-                                </li>
-                                
-                                <li class="site-nav--active">
-                                    <Link to="/movie" class="site-nav__link">
-                                        <img src="https://img.okeinfo.net/content/2016/06/26/6/1425774/antoine-griezmann-man-of-the-match-laga-prancis-vs-republik-irlandia-H3TKB1KsUx.jpg" class="img-user-header" />
-                                        Antoni Grisman 
-                                    </Link>
-                                </li>
 
                                 {/* <li>
                                     <a href="cart.html">

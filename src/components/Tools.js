@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-class Article extends Component {
+class Tools extends Component {
 
     render() {
         return (
             <div className="Article">
-                <h1>Ini Article</h1>
+                <h1>Ini Tools</h1>
             </div>
         );
     }
 }
 
-export default Article;
+export default Tools;
