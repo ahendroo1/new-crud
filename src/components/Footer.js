@@ -40,11 +40,11 @@ class Footer extends Component{
                                     <ul>
 
                                     <li>
-                                        <a href="collections.html">Fasilitas</a>
+                                        <a href="#">Fasilitas</a>
                                     </li>
 
                                     <li>
-                                        <a href="blogs/news.html">Blog</a>
+                                        <a href="#">Blog</a>
                                     </li>
 
                                     </ul>
@@ -54,8 +54,8 @@ class Footer extends Component{
                     
                         <div class="footer-copyright">
                             <div class="container">
-                            <small class="copyright">Copyright © 2018. Offis Coworking Space All right reserved | Powered by
-                                <a href="http://incubic.id" title="" class="copyright-row" > incubic.id</a>.
+                            <small class="copyright">Copyright © 2018. Amad Hendro Lukito All right reserved | Powered by
+                                <a href="#" title="" class="copyright-row" > Ahendroo1</a>.
                             </small>
                             </div>
                         </div>
