@@ -1,0 +1,32 @@
+{
+    "berita": [
+        { 
+            "id": 1, 
+            "title": "Berita 1",
+            "news": "Post 1 hendro",
+            "userpost":1,
+            "datepost": "20 Januari 2019"
+        },
+        { 
+            "id": 2, 
+            "title": "Berita 2",
+            "news": "Post 2PT Toyota-Astra Motor (TAM) secara resmi membuka selubung new Avanza dan new Veloz pada Selasa (15/1). Peluncuran mobil itu, secara kebetulan berjarak kurang dari sebulan, dari terbitnya aturan Otoritas Jasa Keuangan (OJK) soal uang muka (DP/Down Payment) nol persen. Lantas, apakah Avanza-Veloz sudah bisa dipinang menggunakan sistem baru tersebut demi memudahkan kepemilikan? Sebagaimana kita tahu, Avanza sebagai model yang mengisi segmen gemuk tanah air,  ",
+            "userpost":1,
+            "datepost": "20 Januari 2019"
+        },
+        { 
+            "id": 3, 
+            "title": "Berita 3",
+            "news": "Post 3" ,
+            "userpost":1,
+            "datepost": "20 Januari 2019"
+        }
+    ],
+    "user": [
+        { 
+            "id": 1,
+            "name": "hendro" 
+        }
+
+    ]
+}
