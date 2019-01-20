@@ -38,6 +38,7 @@ class Movie extends Component {
             
             let header = <img alt="bjhsx" src={'https://image.tmdb.org/t/p/w500'+item.backdrop_path}/>;
             return (
+
                 // <li key="index">
                 // <h1>{title}</h1>
                 // <p>{overview}</p>
@@ -58,9 +59,12 @@ class Movie extends Component {
                     <div class="container">
                         <center>
                             <h1>Offis Recomended Movie</h1>
+
+                            
                                 {dataMovie}
                         </center>
                     </div>
+
             </div>
         );
     }

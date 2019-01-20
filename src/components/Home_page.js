@@ -18,7 +18,7 @@ import { Card } from 'primereact/components/card/Card';
 import { Growl } from 'primereact/components/growl/Growl';
 import { provider, auth } from './../fire';
 
-class Space_booking extends Component {
+class Home_page extends Component {
     
     constructor(proops) {
         super(proops);
@@ -128,6 +128,8 @@ class Space_booking extends Component {
 
     }
 
+    
+
     registerNow(){
 
         if(this.state.reg_email === "" && this.state.reg_password === "" ){
@@ -166,15 +168,12 @@ class Space_booking extends Component {
                 // if(response.insertedCount === 1){
                 //     this.setState({login_status:true, formBooking: true});
                 // }else{
-
                 //     this.setState({login_status:true, formBooking: true});
-
                 // }
                 // // console.log(response);
                 // this.state.data_karyawan.push(response.data);
-                
                 // this.changeDatakaryawan();
-
+                
             })
         }
     }
@@ -190,7 +189,6 @@ class Space_booking extends Component {
         } else if (this.state.login_status === false) {
             this.setState({ formLogin: true, id_space: id_space, nama_space: nama_space+' Dipilih'  });
         }
-
     }
 
     setWaktuMulai(tgl1, tgl2){
@@ -379,4 +377,4 @@ class Space_booking extends Component {
 }
 
 
-export default Space_booking;
+export default Home_page;
