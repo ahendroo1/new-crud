@@ -51,7 +51,7 @@ class Home_page extends Component {
     showSuccess() {
         this.growl.show({severity: 'success', summary: 'Success...!!', detail: 'Data Berhasil di Hapus'});
     }
-    showUpdate() {
+    showUpdateAlert() {
         this.growl.show({severity: 'success', summary: 'Success...!!', detail: 'Data Berhasil di Update'});
     }
 
@@ -123,13 +123,12 @@ class Home_page extends Component {
             this.setState({ 
 
                 data_berita: [], 
-                formupdate: false,
                 newsshow: false,
+                formupdate: false
 
-            })
-            this.onHide()
+            });
             this.componentDidMount();
-            this.showUpdate();
+            this.showUpdateAlert();
 
         })
         
@@ -210,7 +209,6 @@ class Home_page extends Component {
                             <InputText value={this.state.news} onChange={(e) => this.setState({news: e.target.value})}  id="float-input" type="text"  />
                             <label htmlFor="float-input">Berita</label>
                         </span>
-                        
                         
                         <Button type="button" onClick={() => this.updateCancel()} label="Batal" className="ui-button-danger pull-right"  />
                    
