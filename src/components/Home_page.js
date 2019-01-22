@@ -49,7 +49,7 @@ class Home_page extends Component {
         axios.get('http://localhost:3000/berita')
         .then((response)=>{
             console.log(response)
-            this.setState({data_berita: response.data})
+            this.setState({data_berita: response.data.reverse()})
         })
 
     }
@@ -58,28 +58,29 @@ class Home_page extends Component {
         this.setState({ sendBooking: true });
     }
 
+    newsDelete(id_news){
+
+        var url = 'http://localhost:3000/berita/' + id_news ;
+        axios.delete(url)
+        .then((response)=>{
+            console.log(response)
+            this.setState({data_berita: response.data, data_berita: ""})
+            this.componentDidMount()
+        })
+
+    }
+
     showNews(id_news, title, news, tglnews){
         
         this.setState({ formLogin: true, 
                         title:title,
                         id_news: id_news, 
                         news: news, 
-                        tglnews: tglnews,
+                        tglnews: tglnews
                     });
     }
 
     render() {
-
-        function convertToRupiah(angka) {
-            var rupiah = '';
-            var angkarev = angka.toString().split('').reverse().join('');
-            for (var i = 0; i < angkarev.length; i++) if (i % 3 === 0) rupiah += angkarev.substr(i, 3) + '.';
-            return 'Rp. ' + rupiah.split('', rupiah.length - 1).reverse().join('');
-        }
-
-        let validateInputClass = classNames({
-            'ui-state-error': !this.state.validatePattern
-        });
 
         let data_news_generate = this.state.data_berita.map((col,i) => {
             let img_space = col.news;
@@ -102,7 +103,7 @@ class Home_page extends Component {
                 <Sidebar visible={this.state.formLogin} style={{ height: "100%" }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formLogin: false })}>
                     <div className="panel_booking_content">
 
-                        <h5>{this.state.title}</h5>
+                        <h5>{this.state.title} - {this.state.id_news}</h5>
                         <p>{this.state.tglnews}</p>
                         {/* <small>{this.state.userpost}</small> */}
                         <span className="ui-float-label">
@@ -110,11 +111,10 @@ class Home_page extends Component {
                         </span>
 
                     </div>
+
                     <div className="panel_booking_content">
 
-                            <Button type="button" onClick={() => this.registerNow()} label="Delete" className="ui-button-danger pull-right"  />
-                    
-
+                            <Button type="button" onClick={() => this.newsDelete(this.state.id_news)} label="Delete" className="ui-button-danger pull-right"  />
 
                     </div>
 

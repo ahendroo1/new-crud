@@ -34,7 +34,7 @@ class Tools extends Component {
         // })
 
         axios.post('http://localhost:3000/berita', {
-                
+            id: 0,
             title: this.state.post_title,
             news: this.state.post_berita,
             datepost: this.state.tgl_mulai
