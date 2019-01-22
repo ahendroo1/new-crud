@@ -27,12 +27,14 @@ class Home_page extends Component {
         // this.onValidateInput = this.onValidateInput.bind(this);
         this.state = {  
                         validatePattern: true,
-                        formLogin:false,
+                        newsshow:false,
+                        formupdate: false,
                         login_status: false,
                         value1: 0,
                         value2: 50,
                         data_berita: [],
-                        visible: false
+                        visible: false,
+                        value: null
                         // visibleTop: false,
         };
     }
@@ -48,6 +50,9 @@ class Home_page extends Component {
     
     showSuccess() {
         this.growl.show({severity: 'success', summary: 'Success...!!', detail: 'Data Berhasil di Hapus'});
+    }
+    showUpdate() {
+        this.growl.show({severity: 'success', summary: 'Success...!!', detail: 'Data Berhasil di Update'});
     }
 
     componentDidMount(){
@@ -71,10 +76,8 @@ class Home_page extends Component {
         .then((response)=>{
             console.log(response)
             this.setState({ 
-
-                data_berita: response.data, 
                 data_berita: [], 
-                formLogin: false
+                newsshow: false
 
             })
             this.onHide()
@@ -87,13 +90,51 @@ class Home_page extends Component {
 
     showNews(id_news, title, news, tglnews){
         
-        this.setState({ formLogin: true, 
+        this.setState({ newsshow: true, 
                         title:title,
                         id_news: id_news, 
                         news: news,
                         tglnews: tglnews
                     });
     }
+
+    showUpdate(){
+        
+        this.setState({ formupdate: true});
+    }
+    updateCancel(){
+        
+        this.setState({ formupdate: false});
+
+    }
+
+    updateNow(id_news){
+
+        var url = 'http://localhost:3000/berita/' + id_news ;
+        axios.put(url, {
+            
+            title: this.state.title,
+            news: this.state.news,
+            datepost: this.state.tglnews
+
+        })
+        .then((response)=>{
+            console.log(response)
+            this.setState({ 
+
+                data_berita: [], 
+                formupdate: false,
+                newsshow: false,
+
+            })
+            this.onHide()
+            this.componentDidMount();
+            this.showUpdate();
+
+        })
+        
+    }
+
 
     render() {
 
@@ -126,7 +167,7 @@ class Home_page extends Component {
                 </div>
                 
 
-                <Sidebar visible={this.state.formLogin} style={{ height: "100%" }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formLogin: false })}>
+                <Sidebar visible={this.state.newsshow} style={{ height: "100%" }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ newsshow: false })}>
                     
                     <Dialog header="Alert Message" visible={this.state.visible} style={{width: '50vw'}} footer={footer} onHide={this.onHide} maximizable>
                         Hapus Berita ?
@@ -147,11 +188,39 @@ class Home_page extends Component {
                     <div className="panel_booking_content">
 
                             <Button type="button" onClick={() => this.onClick()} label="Delete" className="ui-button-danger pull-right"  />
-                            <Button type="button" label="Update" className="ui-button-warning pull-right"  />
+                            <Button type="button" onClick={() => this.showUpdate()} label="Update" className="ui-button-warning pull-right"  />
 
                     </div>
 
                 </Sidebar>
+
+                
+                <Sidebar visible={this.state.formupdate} style={{ height: "100%" }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formupdate: false })}>
+                    
+                    
+                    <h4>Update Data</h4>
+                    <div className="panel_booking_content">
+
+                        <span className="ui-float-label">
+                            <InputText value={this.state.title} onChange={(e) => this.setState({title: e.target.value})} id="float-input" type="text"  />
+                            <label htmlFor="float-input">Title</label>
+                        </span>
+
+                        <span className="ui-float-label">
+                            <InputText value={this.state.news} onChange={(e) => this.setState({news: e.target.value})}  id="float-input" type="text"  />
+                            <label htmlFor="float-input">Berita</label>
+                        </span>
+                        
+                        
+                        <Button type="button" onClick={() => this.updateCancel()} label="Batal" className="ui-button-danger pull-right"  />
+                   
+                        <Button type="button" onClick={() => this.updateNow(this.state.id_news)} label="Update Now" className="ui-button-warning pull-right"  />
+                    </div>
+
+                
+
+                </Sidebar>
+
 
                 
             </div>

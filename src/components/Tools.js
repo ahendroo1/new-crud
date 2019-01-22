@@ -22,7 +22,7 @@ class Tools extends Component {
     }
 
     showSuccess() {
-        this.growl.show({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
+        this.growl.show({severity: 'success', summary: 'Success Message', detail: 'News submitted'});
     }
 
     publishNow(){
