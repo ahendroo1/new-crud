@@ -21,7 +21,6 @@ class App extends Component {
         <Header />
           <Route exact path="/" component={Page_home} />
           <Route path="/tools" component={Tools}  />
-
         <Footer />
  
       </div>

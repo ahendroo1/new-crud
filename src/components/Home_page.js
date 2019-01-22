@@ -46,8 +46,7 @@ class Home_page extends Component {
 
     componentDidMount(){
         
-
-        axios.get('https://my-json-server.typicode.com/ahendroo1/api-v1/berita')
+        axios.get('http://localhost:3000/berita')
         .then((response)=>{
             console.log(response)
             this.setState({data_berita: response.data})
@@ -55,23 +54,19 @@ class Home_page extends Component {
 
     }
 
-
     showNewsProgresh(){
         this.setState({ sendBooking: true });
     }
 
-    showNews(id_news, title, news, tglnews, userpost){
+    showNews(id_news, title, news, tglnews){
         
         this.setState({ formLogin: true, 
                         title:title,
                         id_news: id_news, 
                         news: news, 
-                        tglnews: tglnews, 
-                        userpost: userpost 
+                        tglnews: tglnews,
                     });
     }
-
-   
 
     render() {
 
@@ -89,9 +84,10 @@ class Home_page extends Component {
         let data_news_generate = this.state.data_berita.map((col,i) => {
             let img_space = col.news;
 
-            return  <div key={col.id_} onClick={() => this.showNews(col.id, col.title, col.news, col.datepost, col.userpost)} class="col-xs-12 col-md-6 col-lg-4 col"><Card title={col.title}  subtitle={col.datepost} style={{width: '100%'}} className="ui-card-shadow "  ><div> {} </div></Card></div> ;
+            return  <div key={col.id_} onClick={() => this.showNews(col.id, col.title, col.news, col.datepost)} class="col-xs-12 col-md-6 col-lg-4 col"><Card title={col.title}  subtitle={col.datepost} style={{width: '100%'}} className="ui-card-shadow "  ><div> {} </div></Card></div> ;
             
         });
+
         return (
 
             <div className="Space_booking">
@@ -102,7 +98,6 @@ class Home_page extends Component {
 
                         {data_news_generate}
                         
-                       
                 </div>
                 <Sidebar visible={this.state.formLogin} style={{ height: "100%" }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formLogin: false })}>
                     <div className="panel_booking_content">
@@ -111,11 +106,18 @@ class Home_page extends Component {
                         <p>{this.state.tglnews}</p>
                         {/* <small>{this.state.userpost}</small> */}
                         <span className="ui-float-label">
-                        
                             <p>{this.state.news}</p>
                         </span>
 
                     </div>
+                    <div className="panel_booking_content">
+
+                            <Button type="button" onClick={() => this.registerNow()} label="Delete" className="ui-button-primary pull-right"  />
+                    
+
+
+                    </div>
+
                 </Sidebar>
 
                 
