@@ -112,7 +112,7 @@ class Home_page extends Component {
                     </div>
                     <div className="panel_booking_content">
 
-                            <Button type="button" onClick={() => this.registerNow()} label="Delete" className="ui-button-primary pull-right"  />
+                            <Button type="button" onClick={() => this.registerNow()} label="Delete" className="ui-button-danger pull-right"  />
                     
 
 
