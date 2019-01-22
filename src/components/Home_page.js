@@ -14,6 +14,7 @@ import { Sidebar } from "primereact/components/sidebar/Sidebar";
 import { ProgressBar } from 'primereact/components/progressbar/ProgressBar';
 import { Card } from 'primereact/components/card/Card';
 import { Growl } from 'primereact/components/growl/Growl';
+import { Dialog } from 'primereact/components/dialog/Dialog';
 import { provider, auth } from './../fire';
 
 class Home_page extends Component {
@@ -21,6 +22,8 @@ class Home_page extends Component {
     constructor(proops) {
         super(proops);
         var in_date = new Date();
+        this.onClick = this.onClick.bind(this);
+        this.onHide = this.onHide.bind(this);
         // this.onValidateInput = this.onValidateInput.bind(this);
         this.state = {  
                         validatePattern: true,
@@ -28,20 +31,23 @@ class Home_page extends Component {
                         login_status: false,
                         value1: 0,
                         value2: 50,
-                        data_berita: []
+                        data_berita: [],
+                        visible: false
                         // visibleTop: false,
         };
     }
 
-    async login() {
-
-        const result = await auth().signInWithPopup(provider); 
-        this.setState({user: result.user});
+    onClick() {
+        this.setState({visible: true});
     }
 
-    async logout(){
-        await auth().signOut()
-        this.setState({user: null}); 
+    onHide() {
+        this.setState({visible: false});
+    }
+
+    
+    showSuccess() {
+        this.growl.show({severity: 'success', summary: 'Success...!!', detail: 'Data Berhasil di Hapus'});
     }
 
     componentDidMount(){
@@ -64,8 +70,17 @@ class Home_page extends Component {
         axios.delete(url)
         .then((response)=>{
             console.log(response)
-            this.setState({data_berita: response.data, data_berita: ""})
-            this.componentDidMount()
+            this.setState({ 
+
+                data_berita: response.data, 
+                data_berita: [], 
+                formLogin: false
+
+            })
+            this.onHide()
+            this.componentDidMount();
+            this.showSuccess();
+
         })
 
     }
@@ -75,12 +90,19 @@ class Home_page extends Component {
         this.setState({ formLogin: true, 
                         title:title,
                         id_news: id_news, 
-                        news: news, 
+                        news: news,
                         tglnews: tglnews
                     });
     }
 
     render() {
+
+         const footer = (
+            <div>
+                <Button label="Yes" icon="pi pi-check" onClick={() => this.newsDelete(this.state.id_news)}   />
+                <Button label="No" icon="pi pi-times" onClick={() => this.onHide()} className="ui-button-danger pull-right" />
+            </div>
+        );
 
         let data_news_generate = this.state.data_berita.map((col,i) => {
             let img_space = col.news;
@@ -93,6 +115,8 @@ class Home_page extends Component {
 
             <div className="Space_booking">
                 <div class="container">
+                
+                <Growl ref={(el) => this.growl = el} />
 
                     <h5></h5>
                     <hr />
@@ -100,7 +124,15 @@ class Home_page extends Component {
                         {data_news_generate}
                         
                 </div>
+                
+
                 <Sidebar visible={this.state.formLogin} style={{ height: "100%" }} position="bottom" baseZIndex={1000000} onHide={() => this.setState({ formLogin: false })}>
+                    
+                    <Dialog header="Alert Message" visible={this.state.visible} style={{width: '50vw'}} footer={footer} onHide={this.onHide} maximizable>
+                        Hapus Berita ?
+
+                    </Dialog>
+                    
                     <div className="panel_booking_content">
 
                         <h5>{this.state.title} - {this.state.id_news}</h5>
@@ -114,7 +146,8 @@ class Home_page extends Component {
 
                     <div className="panel_booking_content">
 
-                            <Button type="button" onClick={() => this.newsDelete(this.state.id_news)} label="Delete" className="ui-button-danger pull-right"  />
+                            <Button type="button" onClick={() => this.onClick()} label="Delete" className="ui-button-danger pull-right"  />
+                            <Button type="button" label="Update" className="ui-button-warning pull-right"  />
 
                     </div>
 
