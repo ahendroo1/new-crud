@@ -45,7 +45,10 @@ Create the db.json file in the folder and enter the following data array
   ]
 }
 
+
 ```
+
+Activate JSON Server
 
 ```bash
 
