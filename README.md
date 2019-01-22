@@ -68,7 +68,7 @@ __Done!__ :thumbsup:
 
 #
 
-#### Lintang Wisesa :love_letter: _lintangwisesa@ymail.com_
+#### Amad Hendro :love_letter: Ahendroo1@gmail.com
 
 [Facebook](https://www.facebook.com/ahendroo) |
 [Twitter](https://twitter.com/ahendroo) |
