@@ -5,9 +5,8 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 ## Instructions
 #
-# __React & jsPDF__
 
-### A simple React app to Fake Api 
+### A simple React App 
 
 ## __:snowflake: Follow these instructions:__
 
